@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
     <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
-    
+    <filter>
+        <filter-name>AuthorizeFilter</filter-name>
+        <filter-class>filter.AuthorizeFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthorizeFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404-error.jsp</location>
+    </error-page>
     <session-config>
         <session-timeout>
             30
