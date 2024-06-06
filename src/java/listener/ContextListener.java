@@ -7,6 +7,7 @@ package listener;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
+import dao.DatabaseConnection;
 
 /**
  *
@@ -18,11 +19,12 @@ public class ContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         System.out.println("Server started!");
-        // Init connection to db here
+        DatabaseConnection.createConnection();
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
         System.out.println("Server stopped!");
+        DatabaseConnection.closeConnection();
     }
 }
