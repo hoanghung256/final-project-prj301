@@ -1,2 +1,6 @@
 /nbproject/private/
 /build
+/dist/
+
+# Databse configuration
+/src/java/dao/DatabaseConnection.java
