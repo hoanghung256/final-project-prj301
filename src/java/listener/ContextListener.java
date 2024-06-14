@@ -8,6 +8,8 @@ import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 import dao.DatabaseConnection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,13 +20,13 @@ public class ContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        System.out.println("Server started!");
+        Logger.getLogger(ContextListener.class.getName()).log(Level.INFO, "Server started!");
         DatabaseConnection.createConnection();
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        System.out.println("Server stopped!");
+        Logger.getLogger(ContextListener.class.getName()).log(Level.INFO, "Server stopped!");
         DatabaseConnection.closeConnection();
     }
 }
