@@ -48,6 +48,29 @@ CREATE TABLE [Product] (
 	FOREIGN KEY ([categoryId]) REFERENCES [Category]([id])
 );
 
+CREATE TABLE [Review] (
+	[id] INT IDENTITY(1,1),
+	[productId] INT,
+	[userId] INT,
+	[content] NVARCHAR(1000),
+	[rate] INT DEFAULT 0,
+	[createAt] DATETIME DEFAULT GETDATE(),
+
+	CONSTRAINT PK_Review PRIMARY KEY ([id]),
+	FOREIGN KEY ([productId]) REFERENCES [Product]([id]),
+	FOREIGN KEY ([userId]) REFERENCES [User]([id])
+);
+
+CREATE TABLE [ReviewReply] (
+	[id] INT IDENTITY(1,1),
+	[reviewId] INT,
+	[content] NVARCHAR(1000),
+	[createAt] DATETIME DEFAULT GETDATE(),
+
+	CONSTRAINT PK_ReviewReply PRIMARY KEY ([id]),
+	FOREIGN KEY ([reviewId]) REFERENCES [Review]([id]),
+);
+
 CREATE TABLE [ProductImage] (
 	[id] INT IDENTITY(1,1),
 	[productId] INT,
