@@ -49,7 +49,6 @@ public class DatabaseConnection {
     
     public static void setConnection() {
         connection = getConnection();
-                
     }
     
     public static void closeConnection() {
