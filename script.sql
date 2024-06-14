@@ -62,11 +62,55 @@ CREATE TABLE [Cart] (
 	[id] INT IDENTITY(1,1),
 	[userId] INT,
 
-	CONSTRAINT PK_Cart PRIMARY KEY ([id], [userId]),
+	CONSTRAINT PK_Cart PRIMARY KEY ([id]),
 	FOREIGN KEY ([userId]) REFERENCES [User]([id])
 );
 
 CREATE TABLE [CartItem] (
 	[id] INT IDENTITY(1,1),
 	[cartId] INT,
+	[productId] INT,
+	[quantity] INT,
+	[totalPrice] INT,
+
+	CONSTRAINT PK_CartItem PRIMARY KEY ([id]),
+	FOREIGN KEY ([cartId]) REFERENCES [Cart]([id]),
+	FOREIGN KEY ([productId]) REFERENCES [Product]([id])
 );
+
+CREATE TABLE [PaymentType] (
+	[id] INT IDENTITY(1,1),
+	[paymentName] NVARCHAR(100),
+
+	CONSTRAINT PK_PaymentType PRIMARY KEY ([id])
+);
+
+CREATE TABLE [Order] (
+	[id] INT IDENTITY(1,1),
+	[userId] INT,
+	[orderAt] DATETIME,
+	[isPay] BIT DEFAULT 0,
+	[paymentTypeId] INT,
+
+	CONSTRAINT PK_Order PRIMARY KEY ([id]),
+	FOREIGN KEY ([paymentTypeId]) REFERENCES [PaymentType]([id])
+);
+
+CREATE TABLE [OrderDetail] (
+	[id] INT IDENTITY(1,1),
+	[productId] INT,
+	[orderId] INT,
+	[quantity] INT,
+	[totalPrice] INT,
+	[deliveryStatus] VARCHAR(50) DEFAULT 'preparing', -- 'preparing' 'shipping' 'delivered'
+	[deliveryAddress] NVARCHAR(MAX),
+
+	CONSTRAINT PK_OrderDetail PRIMARY KEY ([id]),
+	FOREIGN KEY ([orderId]) REFERENCES [Order]([id]),
+	FOREIGN KEY ([productId]) REFERENCES [Product]([id])
+);
+
+INSERT INTO PaymentType(paymentName) 
+VALUES 
+	('COD'), 
+	('QR CODE')
