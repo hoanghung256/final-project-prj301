@@ -20,6 +20,12 @@ CREATE TABLE [User] (
 
 	CONSTRAINT PK_User PRIMARY KEY ([id])
 );
+--insert data to User Tbl
+INSERT INTO [User] ([username], [password], [email], [phone], [gender], [dob], [address], [avatarUrl], [balance], [isShop], [isAdmin])
+VALUES 
+('Nguyen Quoc Anh', '12345', 'anhnq@fpt.edu.vn', '0123456789', 1, '2004-03-10', '35 Nguyen Dinh Hien', 'https://i.pinimg.com/564x/3d/46/ea/3d46ea3ac49f42439cf00d076cb9d626.jpg', 100000, 1, 0)
+
+
 
 CREATE TABLE [Category] (
 	[id] INT IDENTITY(1,1),
@@ -30,6 +36,14 @@ CREATE TABLE [Category] (
 	CONSTRAINT PK_Category PRIMARY KEY ([id]),
 	FOREIGN KEY ([parentId]) REFERENCES [Category]([id])
 );
+--insert data to category table
+INSERT INTO [Category] ([name], [parentId])
+VALUES 
+('Electronics', NULL),
+('Home Appliances', NULL),
+('Kitchen Appliances',NULL),
+('Fashion', NULL),
+('Comestic', NULL)
 
 CREATE TABLE [Product] (
 	[id] INT IDENTITY(1,1),
@@ -38,7 +52,6 @@ CREATE TABLE [Product] (
 	[categoryId] INT,
 	[description] NVARCHAR(MAX),
 	[price] INT DEFAULT 0,
-	[sold] INT DEFAULT 0,
 	[createAt] DATETIME DEFAULT GETDATE(),
 	[updateAt] DATETIME DEFAULT GETDATE(),
 	[totalBuy] INT DEFAULT 0,
@@ -48,6 +61,11 @@ CREATE TABLE [Product] (
 	FOREIGN KEY ([sellBy]) REFERENCES [User]([id]),
 	FOREIGN KEY ([categoryId]) REFERENCES [Category]([id])
 );
+
+--insert into product table
+INSERT INTO [Product] ([productName], [sellBy], [categoryId], [description], [price], [avatarUrl])
+VALUES
+('T-Shirt', 1, 1, 'A comfortable T-shirt', 1000, 'https://i.pinimg.com/564x/0d/35/c5/0d35c5fad1af587657a2680d474ba503.jpg')
 
 CREATE TABLE [Review] (
 	[id] INT IDENTITY(1,1),
@@ -61,6 +79,10 @@ CREATE TABLE [Review] (
 	FOREIGN KEY ([productId]) REFERENCES [Product]([id]),
 	FOREIGN KEY ([userId]) REFERENCES [User]([id])
 );
+--insert data into Review Table
+INSERT INTO [Review] ([productId], [userId], [content], [rate])
+VALUES
+(2, 1, 'Great T-shirt, very fit and comfortable.', 5)
 
 CREATE TABLE [ReviewReply] (
 	[id] INT IDENTITY(1,1),
@@ -71,6 +93,10 @@ CREATE TABLE [ReviewReply] (
 	CONSTRAINT PK_ReviewReply PRIMARY KEY ([id]),
 	FOREIGN KEY ([reviewId]) REFERENCES [Review]([id]),
 );
+--insert data into ReviewReply table
+INSERT INTO [ReviewReply] ([reviewId], [content])
+VALUES
+(1, 'Thank you for your feedback!')
 
 CREATE TABLE [ProductImage] (
 	[id] INT IDENTITY(1,1),
@@ -81,6 +107,12 @@ CREATE TABLE [ProductImage] (
 	CONSTRAINT PK_ProductImage PRIMARY KEY ([id]),
 	FOREIGN KEY ([productId]) REFERENCES [Product]([id])
 );
+--insert into ProductImage table
+INSERT INTO [ProductImage] ([productId], [url])
+VALUES
+(2, 'https://i.pinimg.com/564x/0d/35/c5/0d35c5fad1af587657a2680d474ba503.jpg'),
+(2, 'https://i.pinimg.com/564x/88/fe/6c/88fe6c2eefbc33eea6fe310c68b6c665.jpg'),
+(2, 'https://i.pinimg.com/564x/c3/00/62/c300623b97640b93c40fcfad069236c3.jpg')
 
 CREATE TABLE [Cart] (
 	[id] INT IDENTITY(1,1),
