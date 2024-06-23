@@ -26,11 +26,11 @@ import java.util.logging.Logger;
  */
 public class Cast {
     
-    private static final String modelModule = "model.";
+    private static final String MODEL_MODULE = "model.";
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
     
     public static Object cast(String value) {
-        String className = modelModule + value.split("\\{")[0];
+        String className = MODEL_MODULE + value.split("\\{")[0];
         Object o = null;
         
         try {
@@ -73,17 +73,15 @@ public class Cast {
     private static Class<?> castAnnotatedTypeToClass(AnnotatedType annotatedType) {
         Type type = annotatedType.getType();
         
-        if (type instanceof Class<?>) {
-            return (Class<?>) type;
-        } else if (type instanceof ParameterizedType) {
-            return (Class<?>) ((ParameterizedType) type).getRawType();
-        } else if (type instanceof AnnotatedArrayType) {
-            return (Class<?>) ((AnnotatedArrayType) type).getAnnotatedGenericComponentType().getType();
-        } else if (type instanceof AnnotatedTypeVariable) {
-            AnnotatedTypeVariable atv = (AnnotatedTypeVariable) type;
+        if (type instanceof Class<?> aClass) {
+            return aClass;
+        } else if (type instanceof ParameterizedType parameterizedType) {
+            return (Class<?>) parameterizedType.getRawType();
+        } else if (type instanceof AnnotatedArrayType annotatedArrayType) {
+            return (Class<?>) annotatedArrayType.getAnnotatedGenericComponentType().getType();
+        } else if (type instanceof AnnotatedTypeVariable atv) {
             return Object.class;
-        } else if (type instanceof AnnotatedWildcardType) {
-            AnnotatedWildcardType awt = (AnnotatedWildcardType) type;
+        } else if (type instanceof AnnotatedWildcardType awt) {
             return Object.class;
         } else {
             throw new IllegalArgumentException("Unsupported AnnotatedType: " + annotatedType);
@@ -94,15 +92,15 @@ public class Cast {
         Class<?> fieldType = castAnnotatedTypeToClass(field.getAnnotatedType());
         
         if (fieldType == int.class || fieldType == Integer.class) {
-            return Integer.parseInt(valueStr);
+            return Integer.valueOf(valueStr);
         } else if (fieldType == long.class || fieldType == Long.class) {
-            return Long.parseLong(valueStr);
+            return Long.valueOf(valueStr);
         } else if (fieldType == float.class || fieldType == Float.class) {
-            return Float.parseFloat(valueStr);
+            return Float.valueOf(valueStr);
         } else if (fieldType == double.class || fieldType == Double.class) {
-            return Double.parseDouble(valueStr);
+            return Double.valueOf(valueStr);
         } else if (fieldType == boolean.class || fieldType == Boolean.class) {
-            return Boolean.parseBoolean(valueStr);
+            return Boolean.valueOf(valueStr);
         } else if (fieldType == Date.class) {
             try {
                 return DATE_FORMAT.parse(valueStr);
@@ -118,9 +116,4 @@ public class Cast {
             return valueStr;
         }
     }
-//    public static void main(String[] args) {
-//        Object o = cast("User{id=1, username=hoang hung, password=123, email=hung@gmail.com, phone=0123456576, gender=MALE, dob=Sat Jun 22 16:53:30 ICT 2024, joinAt=Sat Jun 22 16:53:30 ICT 2024, avatarUrl=url/url/image/jsjs.png, address=My home address, role=CUSTOMER, balance=10000}");
-////        User u = new User(1, "hoang hung", "123", "hung@gmail.com", "0123456576", Gender.MALE, new Date(), new Date(), "url/url/image/jsjs.png", "My home address", Role.CUSTOMER, 10000);
-//        System.out.println(o.toString());
-//    }
 }
