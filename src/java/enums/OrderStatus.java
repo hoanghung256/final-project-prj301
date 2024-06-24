@@ -9,6 +9,7 @@ package enums;
  * @author hoang hung
  */
 public enum OrderStatus {
+    CONFIRMATION_WAITING,
     PREPARING,
     DELIVERING,
     DELIVERED;
