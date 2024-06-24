@@ -9,7 +9,7 @@ CREATE TABLE [User] (
 	[password] VARCHAR(MAX),
 	[email] VARCHAR(100),
 	[phone] VARCHAR(10),
-	[gender] BIT,
+	[gender] VARCHAR(20),
 	[dob] DATE,
 	[address] NVARCHAR(MAX),
 	[joinAt] DATE DEFAULT GETDATE(),
@@ -23,7 +23,7 @@ CREATE TABLE [User] (
 --insert data to User Tbl
 INSERT INTO [User] ([username], [password], [email], [phone], [gender], [dob], [address], [avatarUrl], [balance], [isShop], [isAdmin])
 VALUES 
-('Nguyen Quoc Anh', '12345', 'anhnq@fpt.edu.vn', '0123456789', 1, '2004-03-10', '35 Nguyen Dinh Hien', 'https://i.pinimg.com/564x/3d/46/ea/3d46ea3ac49f42439cf00d076cb9d626.jpg', 100000, 1, 0)
+('Nguyen Quoc Anh', '12345', 'anhnq@fpt.edu.vn', '0123456789', 'MALE', '2004-03-10', '35 Nguyen Dinh Hien', 'https://i.pinimg.com/564x/3d/46/ea/3d46ea3ac49f42439cf00d076cb9d626.jpg', 100000, 1, 0)
 
 
 
@@ -158,7 +158,7 @@ CREATE TABLE [OrderDetail] (
 	[orderId] INT,
 	[quantity] INT,
 	[totalPrice] INT,
-	[deliveryStatus] VARCHAR(50) DEFAULT 'preparing', -- 'preparing' 'shipping' 'delivered'
+	[status] VARCHAR(50) DEFAULT 'CONFIRMATION_WAITING', -- 'PREPARING' 'DELIVERING' 'DELIVERED'
 	[deliveryAddress] NVARCHAR(MAX),
 
 	CONSTRAINT PK_OrderDetail PRIMARY KEY ([id]),
