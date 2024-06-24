@@ -4,30 +4,36 @@
  */
 package filter;
 
+import enums.Role;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import model.User;
+import util.Cookiez;
 
 /**
  *
  * @author hoang hung
  */
-public class AuthorizeFilter implements Filter {
+public class AuthenticationFilter implements Filter {
 
-    /**
-     *
-     * @param servletRequest
-     * @param servletResponse
-     * @param filterChain
-     * @throws IOException
-     * @throws ServletException
-     */
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        // Implement authorize here
+        // Cast the request and response to HttpServlet equivalents
+        HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
+        HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
+
+        User u = (User) Cookiez.get("userInfo", httpRequest);
+        
+        if (u == null) {
+            httpResponse.sendRedirect("login.jsp");
+            return;
+        }
         filterChain.doFilter(servletRequest, servletResponse);
     }
 }
