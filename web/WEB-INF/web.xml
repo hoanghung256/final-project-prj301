@@ -3,18 +3,46 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+    
+    <!--Filter order-->
     <filter>
-        <filter-name>AuthorizeFilter</filter-name>
-        <filter-class>filter.AuthorizeFilter</filter-class>
+        <filter-name>AuthenticationFilter</filter-name>
+        <filter-class>filter.AuthenticationFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>RoleFilter</filter-name>
+        <filter-class>filter.RoleFilter</filter-class>
+    </filter>
+    
+    <!--Filters mapping-->
     <filter-mapping>
-        <filter-name>AuthorizeFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/cart/*</url-pattern>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/order/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/shop/*</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>RoleFilter</filter-name>
+        <url-pattern>/shop/*</url-pattern>
+    </filter-mapping>
+    
+    
     <error-page>
         <error-code>404</error-code>
-        <location>/util/404-error.jsp</location>
+        <location>/error/404-error.jsp</location>
     </error-page>
+    <error-page>
+        <error-code>304</error-code>
+        <location>/error/304-error.jsp</location>
+    </error-page>
+    
     <session-config>
         <session-timeout>
             30
