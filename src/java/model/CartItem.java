@@ -9,10 +9,10 @@ package model;
  * @author ADMIN
  */
 public class CartItem {
-    int id;
-    int productId;
-    int quantity;
-    int totalPrice;
+    private int id;
+    private int productId;
+    private int quantity;
+    private int totalPrice;
 
     public CartItem(int id, int productId, int quantity, int totalPrice) {
         this.id = id;
