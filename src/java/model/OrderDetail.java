@@ -1,24 +1,27 @@
 package model;
 
+import enums.OrderStatus;
+
 public class OrderDetail {
     private int detailId;
     private int productId;
     private int orderId;
     private int quantity;
     private int totalPrice;
-    private String deliveryStatus;
+    private OrderStatus status;
     private String deliveryAddress;
 
     public OrderDetail() {
     }
 
-    public OrderDetail(int detailId, int productId, int orderId, int quantity, int totalPrice, String deliveryStatus, String deliveryAddress) {
+    public OrderDetail(int detailId, int productId, int orderId, int quantity, int totalPrice, OrderStatus status,
+            String deliveryAddress) {
         this.detailId = detailId;
         this.productId = productId;
         this.orderId = orderId;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
-        this.deliveryStatus = deliveryStatus;
+        this.status = status;
         this.deliveryAddress = deliveryAddress;
     }
 
@@ -62,12 +65,12 @@ public class OrderDetail {
         this.totalPrice = totalPrice;
     }
 
-    public String getDeliveryStatus() {
-        return deliveryStatus;
+    public OrderStatus getStatus() {
+        return status;
     }
 
-    public void setDeliveryStatus(String deliveryStatus) {
-        this.deliveryStatus = deliveryStatus;
+    public void setStatus(OrderStatus status) {
+        this.status = status;
     }
 
     public String getDeliveryAddress() {
@@ -76,5 +79,12 @@ public class OrderDetail {
 
     public void setDeliveryAddress(String deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderDetail{" + "detailId=" + detailId + ", productId=" + productId + ", orderId=" + orderId + ", quantity="
+                + quantity + ", totalPrice=" + totalPrice + ", status=" + status + ", deliveryAddress="
+                + deliveryAddress + "}";
     }
 }
