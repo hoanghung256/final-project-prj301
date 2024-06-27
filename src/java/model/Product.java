@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
  * @author MinhThang
  */
 public class Product {
+    private int id;
     private String productName;
     private int sellBy;
     private int categoryId;
@@ -22,7 +23,8 @@ public class Product {
     private int totalBuy;
     private String avatarUrl;
 
-    public Product(String productName, int sellBy, int categoryId, int quantity, int price, String description, LocalDateTime createAt, LocalDateTime updateAt, int totalBuy, String avatarUrl) {
+    public Product(int id, String productName, int sellBy, int categoryId, int quantity, int price, String description, LocalDateTime createAt, LocalDateTime updateAt, int totalBuy, String avatarUrl) {
+        this.id = id;
         this.productName = productName;
         this.sellBy = sellBy;
         this.categoryId = categoryId;
@@ -33,6 +35,14 @@ public class Product {
         this.updateAt = updateAt;
         this.totalBuy = totalBuy;
         this.avatarUrl = avatarUrl;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id= id;
     }
 
     public String getProductName() {
@@ -119,7 +129,4 @@ public class Product {
     public String toString() {
         return "Product{" + "productName=" + productName + ", sellBy=" + sellBy + ", categoryId=" + categoryId + ", quantity=" + quantity + ", price=" + price + ", description=" + description + ", createAt=" + createAt + ", updateAt=" + updateAt + ", totalBuy=" + totalBuy + ", avatarUrl=" + avatarUrl + '}';
     }
-    
-    
-    
 }
