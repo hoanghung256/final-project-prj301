@@ -9,8 +9,8 @@ package model;
  * @author ADMIN
  */
 public class Cart {
-    int cartId;
-    int userId;
+    private int cartId;
+    private int userId;
 
     public Cart(int cartId, int userId) {
         this.cartId = cartId;
