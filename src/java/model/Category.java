@@ -4,25 +4,23 @@
  */
 package model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  *
  * @author ADMIN
  */
 public class Category {
-   private int id;
-   private String categoryName;
-   private int parentId;
-   private Date createAt;
-   
-   
+    private int id;
+    private String categoryName;
+    private int parentId;
+    private LocalDate createAt;
 
     public Category() {
     }
    
 
-    public Category(int id, String categoryName, int parentId, Date createAt) {
+    public Category(int id, String categoryName, int parentId, LocalDate createAt) {
         this.id = id;
         this.categoryName = categoryName;
         this.parentId = parentId;
@@ -53,11 +51,11 @@ public class Category {
         this.parentId = parentId;
     }
 
-    public Date getCreateAt() {
+    public LocalDate getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(Date createAt) {
+    public void setCreateAt(LocalDate createAt) {
         this.createAt = createAt;
     }
 
@@ -65,9 +63,4 @@ public class Category {
     public String toString() {
         return "Category{" + "id=" + id + ", categoryName=" + categoryName + ", parentId=" + parentId + ", createAt=" + createAt + '}';
     }
-   
-   
-   
-           
-    
 }
