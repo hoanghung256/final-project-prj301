@@ -15,6 +15,3 @@
         <link rel="icon" href="../image/shopping-cart-icon.jpg">
     </head>
     <body>
-        <header>
-            <p class="text-primary">Init header</p> 
-        </header>
