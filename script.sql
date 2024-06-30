@@ -52,6 +52,8 @@ CREATE TABLE [Product] (
 	[categoryId] INT,
 	[description] NVARCHAR(MAX),
 	[price] INT DEFAULT 0,
+	[quantity] INT DEFAULT 0,
+	[sold] INT DEFAULT 0,
 	[createAt] DATETIME DEFAULT GETDATE(),
 	[updateAt] DATETIME DEFAULT GETDATE(),
 	[totalBuy] INT DEFAULT 0,
