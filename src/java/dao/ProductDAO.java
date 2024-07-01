@@ -131,7 +131,7 @@ public class ProductDAO {
                                      rs.getInt("price"),
                                      rs.getInt("quantity"),
                                      rs.getInt("sold"),
-                                     rs.getTimestamp("createAt").toLocalDateTime(),
+                                     rs.getTimestamp("createAt").toLocalDateTime(), 
                                      rs.getTimestamp("updateAt").toLocalDateTime(),
                                      rs.getInt("totalBuy"),
                                      rs.getString("avatarUrl"));

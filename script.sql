@@ -23,7 +23,9 @@ CREATE TABLE [User] (
 --insert data to User Tbl
 INSERT INTO [User] ([username], [password], [email], [phone], [gender], [dob], [address], [avatarUrl], [balance], [isShop], [isAdmin])
 VALUES 
+('Nguyen Minh Thang', '12345', 'anhnq@fpt.edu.vn', '0123456789', 'MALE', '2004-03-10', '35 Nguyen Dinh Hien', 'https://i.pinimg.com/564x/3d/46/ea/3d46ea3ac49f42439cf00d076cb9d626.jpg', 100000, 0, 0),
 ('Nguyen Quoc Anh', '12345', 'anhnq@fpt.edu.vn', '0123456789', 'MALE', '2004-03-10', '35 Nguyen Dinh Hien', 'https://i.pinimg.com/564x/3d/46/ea/3d46ea3ac49f42439cf00d076cb9d626.jpg', 100000, 1, 0)
+
 
 
 
@@ -84,7 +86,7 @@ CREATE TABLE [Review] (
 --insert data into Review Table
 INSERT INTO [Review] ([productId], [userId], [content], [rate])
 VALUES
-(2, 1, 'Great T-shirt, very fit and comfortable.', 5)
+(1, 2, 'Great T-shirt, very fit and comfortable.', 5)
 
 CREATE TABLE [ReviewReply] (
 	[id] INT IDENTITY(1,1),
@@ -98,7 +100,7 @@ CREATE TABLE [ReviewReply] (
 --insert data into ReviewReply table
 INSERT INTO [ReviewReply] ([reviewId], [content])
 VALUES
-(1, 'Thank you for your feedback!')
+(3, 'Thank you for your feedback!')
 
 CREATE TABLE [ProductImage] (
 	[id] INT IDENTITY(1,1),
@@ -172,3 +174,29 @@ INSERT INTO PaymentType(paymentName)
 VALUES 
 	('COD'), 
 	('QR CODE')
+
+select * from Product
+
+INSERT INTO [Product] ([productName], [sellBy], [categoryId], [description], [price], [avatarUrl])
+VALUES
+('knife', 1, 2, 'A comfortable knife', 1000, 'https://i.pinimg.com/564x/0d/35/c5/0d35c5fad1af587657a2680d474ba503.jpg')
+
+delete from Product 
+where id = '2'
+
+UPDATE [Product]
+SET
+    [productName] = 'knife',
+    [sellBy] = 2,
+    [categoryId] = 3,
+    [description] = 'A sharp knife',
+    [price] = 100,
+    [quantity] = 50,
+    [sold] = 10,
+    [updateAt] = GETDATE(),
+    [totalBuy] = 20,
+    [avatarUrl] = 'http://example.com/newimage.jpg'
+WHERE [id] = 4;
+
+select * from Product
+where id = '4'

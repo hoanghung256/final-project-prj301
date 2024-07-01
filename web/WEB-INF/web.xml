@@ -3,7 +3,6 @@
     <welcome-file-list>
         <welcome-file>home.jsp</welcome-file>
     </welcome-file-list>
-    
     <!--Filter order-->
     <filter>
         <filter-name>AuthenticationFilter</filter-name>
@@ -13,7 +12,6 @@
         <filter-name>RoleFilter</filter-name>
         <filter-class>filter.RoleFilter</filter-class>
     </filter>
-    
     <!--Filters mapping-->
     <filter-mapping>
         <filter-name>AuthenticationFilter</filter-name>
@@ -27,13 +25,10 @@
         <filter-name>AuthenticationFilter</filter-name>
         <url-pattern>/shop/*</url-pattern>
     </filter-mapping>
-    
     <filter-mapping>
         <filter-name>RoleFilter</filter-name>
         <url-pattern>/shop/*</url-pattern>
     </filter-mapping>
-    
-    
     <error-page>
         <error-code>404</error-code>
         <location>/error/404-error.jsp</location>
@@ -42,7 +37,14 @@
         <error-code>304</error-code>
         <location>/error/304-error.jsp</location>
     </error-page>
-    
+    <servlet>
+        <servlet-name>ProductDetailsController</servlet-name>
+        <servlet-class>controller.ProductDetailsController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProductDetailsController</servlet-name>
+        <url-pattern>/ProductDetailsController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
