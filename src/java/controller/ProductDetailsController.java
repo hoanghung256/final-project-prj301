@@ -18,6 +18,7 @@ import model.Product;
  *
  * @author ASUS
  */
+
 public class ProductDetailsController extends HttpServlet {
     
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -42,9 +43,6 @@ public class ProductDetailsController extends HttpServlet {
             throws ServletException, IOException {
         try {
              String command =  request.getParameter("command");
-             if(command == null){
-                 command = "LOAD";
-             }
              switch(command){
                  case "LOAD":
                      loadProductDetails(request, response);
@@ -69,7 +67,7 @@ public class ProductDetailsController extends HttpServlet {
         String id = request.getParameter("id");
         Product product = dao.searchById(id);
         request.setAttribute("product", product);
-        request.getRequestDispatcher("product-details.jsp").forward(request, response);
+        request.getRequestDispatcher("product/product-details.jsp").forward(request, response);
     }
     
     @Override
