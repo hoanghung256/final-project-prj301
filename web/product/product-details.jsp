@@ -1,32 +1,26 @@
 <%-- 
     Document   : product-details
-    Created on : Jul 1, 2024, 4:39:01 PM
+    Created on : Jul 1, 2024, 4:39:01?PM
     Author     : ASUS
 --%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!--        <link rel="stylesheet" href="../style/product-details.css"/>-->
-        <title>JSP Page</title>
-        <style>
-           body {
+<%@ include file="../layout/customer-navbar.jsp" %>
+
+            <style>
+/*           body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
-}
+}*/
 
-.container {
+/*.container {
     max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+}*/
 
 .product {
     display: flex;
@@ -120,8 +114,7 @@
     text-decoration: underline;
 }
         </style>
-    </head>
-    <body>
+<section>
         <div class="container">
            <div class="product">
                <div class="product-image">
@@ -137,13 +130,13 @@
                            <span>&#9733;</span>
                            <span>&#9734;</span> 
                        </div>
-                       <span class="review-count">4.0 (200 đánh giá)</span>
+                       <span class="review-count">4.0 (200 Feedback)</span>
                        <span class="sold-count">| Sold: ${product.sold}</span>
                    </div>
                     <p class="price">Price: <span id="price">${product.price}</span> </p>
                     <p class="short-description">${product.description}</p>
-                    <button class="buy-now">Mua ngay</button>
-                    <button class="add-to-cart">Thêm vào giỏ hàng</button>
+                    <button class="buy-now">Buy Now</button>
+                    <button class="add-to-cart">Add to cart</button>
                    <div class="share">
                        <span>Share:</span>
                        <a href="Facebook.com">Facebook</a>
@@ -152,7 +145,5 @@
                </div>
            </div>
        </div>
-    </body>
-    
-    
-</html>
+</section>
+<%@ include file="../layout/customer-footer.jsp" %>

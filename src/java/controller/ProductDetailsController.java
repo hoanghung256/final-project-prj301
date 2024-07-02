@@ -18,7 +18,6 @@ import model.Product;
  *
  * @author ASUS
  */
-
 public class ProductDetailsController extends HttpServlet {
     
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
