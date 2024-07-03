@@ -28,7 +28,6 @@ public class DatabaseConnection {
     public static void createConnection() {
         try {
             DriverManager.registerDriver(new SQLServerDriver());
-
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
         } catch (SQLException e) {
             Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, e);

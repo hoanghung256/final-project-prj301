@@ -29,10 +29,14 @@
         <filter-name>RoleFilter</filter-name>
         <url-pattern>/shop/*</url-pattern>
     </filter-mapping>
+<<<<<<< HEAD
     <error-page>
+=======
+<!--    <error-page>
+>>>>>>> 77c8856 (add registerpage)
         <error-code>404</error-code>
         <location>/error/404-error.jsp</location>
-    </error-page>
+    </error-page>-->
     <error-page>
         <error-code>304</error-code>
         <location>/error/304-error.jsp</location>
