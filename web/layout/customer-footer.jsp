@@ -10,6 +10,7 @@
     }
 </style>
 
+    </div>
 </main>
 <footer class="bg-light">
     <div class="container mx-auto pt-3">

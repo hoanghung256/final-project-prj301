@@ -15,9 +15,20 @@
     .btn {
         border-color: black;
     }
+    
+    main {
+        background-color: rgba(241, 241, 241, 1);
+    }
+    
+    .body-content {
+        margin-left: 5rem;
+        margin-right: 5rem;
+        width: 90rem;
+        min-height: 40rem;
+    }
 </style>
 
-<header class="pb-3">
+<header class="pb-5">
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light py-3" style="background-color: #e3f2fd">
         <div class="container">
             <a class="navbar-brand" href="#">LOGO</a>
@@ -31,4 +42,6 @@
     </nav>
 </header>
 
-<main class="mt-5">
+<main>
+    <div class="body-content mt-4">
+        
