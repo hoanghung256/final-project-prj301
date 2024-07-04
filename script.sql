@@ -221,3 +221,8 @@ BEGIN
     
     SET @i = @i + 1;
 END;
+=======
+INSERT INTO PaymentType(paymentName) 
+VALUES 
+	('COD'), 
+	('QR CODE')
