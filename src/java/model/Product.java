@@ -23,6 +23,21 @@ public class Product {
     private int totalBuy;
     private String avatarUrl;
 
+    public Product() {
+    }
+    
+    public Product(int id, int price) {
+        this.id = id;
+        this.price = price;
+    }
+
+    public Product(int id, String productName, int price, String avatarUrl) {
+        this.id = id;
+        this.productName = productName;
+        this.price = price;
+        this.avatarUrl = avatarUrl;
+    }
+
     public Product(int id, String productName, int sellBy, int categoryId, int quantity, int price, String description, LocalDateTime createAt, LocalDateTime updateAt, int totalBuy, String avatarUrl) {
         this.id = id;
         this.productName = productName;
