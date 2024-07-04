@@ -15,22 +15,27 @@ public class Product {
     private String productName;
     private int sellBy;
     private int categoryId;
-    private int quantity;
-    private int price;
     private String description;
+    private int price;
+    private int quantity;
+    private int sold;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
     private int totalBuy;
     private String avatarUrl;
 
-    public Product(int id, String productName, int sellBy, int categoryId, int quantity, int price, String description, LocalDateTime createAt, LocalDateTime updateAt, int totalBuy, String avatarUrl) {
+    public Product() {
+    }
+
+    public Product(int id, String productName, int sellBy, int categoryId, String description, int price, int quantity, int sold, LocalDateTime createAt, LocalDateTime updateAt, int totalBuy, String avatarUrl) {
         this.id = id;
         this.productName = productName;
         this.sellBy = sellBy;
         this.categoryId = categoryId;
-        this.quantity = quantity;
-        this.price = price;
         this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+        this.sold = sold;
         this.createAt = createAt;
         this.updateAt = updateAt;
         this.totalBuy = totalBuy;
@@ -42,7 +47,7 @@ public class Product {
     }
 
     public void setId(int id) {
-        this.id= id;
+        this.id = id;
     }
 
     public String getProductName() {
@@ -61,20 +66,20 @@ public class Product {
         this.sellBy = sellBy;
     }
 
-    public int getcategoryId() {
+    public int getCategoryId() {
         return categoryId;
     }
 
-    public void setcategoryId(int categoryId) {
+    public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public String getDescription() {
+        return description;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getPrice() {
@@ -85,12 +90,20 @@ public class Product {
         this.price = price;
     }
 
-    public String getDescription() {
-        return description;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public int getSold() {
+        return sold;
+    }
+
+    public void setSold(int sold) {
+        this.sold = sold;
     }
 
     public LocalDateTime getCreateAt() {
@@ -127,6 +140,6 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" + "productName=" + productName + ", sellBy=" + sellBy + ", categoryId=" + categoryId + ", quantity=" + quantity + ", price=" + price + ", description=" + description + ", createAt=" + createAt + ", updateAt=" + updateAt + ", totalBuy=" + totalBuy + ", avatarUrl=" + avatarUrl + '}';
+        return "Product{" + "id=" + id + ", productName=" + productName + ", sellBy=" + sellBy + ", categoryId=" + categoryId + ", description=" + description + ", price=" + price + ", quantity=" + quantity + ", sold=" + sold + ", createAt=" + createAt + ", updateAt=" + updateAt + ", totalBuy=" + totalBuy + ", avatarUrl=" + avatarUrl + '}';
     }
 }
