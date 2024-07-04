@@ -16,14 +16,14 @@ import model.Product;
  */
 public class ProductDAO {
     private final Connection conn ;
+
     private PreparedStatement ps = null;
     private ResultSet rs = null;
 
     public ProductDAO() {
         this.conn = DatabaseConnection.getConnection();
     }
-    
-    
+
     //READ
     public List<Product> getAllProduct(){
         List<Product> list = new ArrayList<>();
