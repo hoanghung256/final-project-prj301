@@ -123,6 +123,10 @@ CREATE TABLE [Cart] (
 	CONSTRAINT PK_Cart PRIMARY KEY ([id]),
 	FOREIGN KEY ([userId]) REFERENCES [User]([id])
 );
+INSERT INTO [Cart] ([userId])
+VALUES
+	(1),
+	(2);
 
 CREATE TABLE [CartItem] (
 	[id] INT IDENTITY(1,1),
@@ -135,6 +139,11 @@ CREATE TABLE [CartItem] (
 	FOREIGN KEY ([cartId]) REFERENCES [Cart]([id]),
 	FOREIGN KEY ([productId]) REFERENCES [Product]([id])
 );
+INSERT INTO [CartItem] ([cartId], [productId], [quantity], [totalPrice])
+VALUES
+	(1, 1, 1, 1000),
+	(2, 2, 2, 1200);
+	(3, 4, 10, 10000000);
 
 CREATE TABLE [PaymentType] (
 	[id] INT IDENTITY(1,1),
@@ -142,6 +151,12 @@ CREATE TABLE [PaymentType] (
 
 	CONSTRAINT PK_PaymentType PRIMARY KEY ([id])
 );
+
+INSERT INTO [PaymentType] ([paymentName])
+VALUES
+	(N'Credit Card'),
+	(N'PayPal'),
+	(N'Bank Transfer');
 
 CREATE TABLE [Order] (
 	[id] INT IDENTITY(1,1),
@@ -153,6 +168,11 @@ CREATE TABLE [Order] (
 	CONSTRAINT PK_Order PRIMARY KEY ([id]),
 	FOREIGN KEY ([paymentTypeId]) REFERENCES [PaymentType]([id])
 );
+
+INSERT INTO [Order] ([userId], [orderAt], [isPay], [paymentTypeId])
+VALUES
+	(4, GETDATE(), 0, 1),
+	(2, GETDATE(), 1, 2);
 
 CREATE TABLE [OrderDetail] (
 	[id] INT IDENTITY(1,1),
@@ -167,6 +187,11 @@ CREATE TABLE [OrderDetail] (
 	FOREIGN KEY ([orderId]) REFERENCES [Order]([id]),
 	FOREIGN KEY ([productId]) REFERENCES [Product]([id])
 );
+INSERT INTO [OrderDetail] ([productId], [orderId], [quantity], [totalPrice], [status], [deliveryAddress])
+VALUES
+	(1, 1, 2, 500, 'CONFIRMATION_WAITING', '21 Huynh Van Nghe'),
+	(2, 1, 1, 300, 'PREPARING', '01 Thuy Son 4');
+	(4, 3, 3, 750, 'DELIVERED', '680 Tran Hung Dao');
 
 INSERT INTO PaymentType(paymentName) 
 VALUES 

@@ -42,7 +42,26 @@
         <error-code>304</error-code>
         <location>/error/304-error.jsp</location>
     </error-page>
+<<<<<<< Updated upstream
     
+=======
+    <servlet>
+        <servlet-name>ProductDetailsController</servlet-name>
+        <servlet-class>controller.ProductDetailsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderDetailsController</servlet-name>
+        <servlet-class>controller.OrderDetailsController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProductDetailsController</servlet-name>
+        <url-pattern>/ProductDetailsController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderDetailsController</servlet-name>
+        <url-pattern>/OrderDetailsController</url-pattern>
+    </servlet-mapping>
+>>>>>>> Stashed changes
     <session-config>
         <session-timeout>
             30
