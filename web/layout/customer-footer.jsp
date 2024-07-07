@@ -10,7 +10,8 @@
     }
 </style>
 
-<!--</main>-->
+    </div>
+</main>
 <footer class="bg-light">
     <div class="container mx-auto pt-3">
         <div class="d-flex justify-content-around">

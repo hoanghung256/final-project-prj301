@@ -10,13 +10,21 @@ package model;
  */
 public class CartItem {
     private int id;
-    private int productId;
+    private Product product;
     private int quantity;
     private int totalPrice;
 
-    public CartItem(int id, int productId, int quantity, int totalPrice) {
+    public CartItem() {
+    }
+    
+    public CartItem(Product product, int quantity) {
+        this.product = product;
+        this.quantity = quantity;
+    }
+    
+    public CartItem(int id, Product product, int quantity, int totalPrice) {
         this.id = id;
-        this.productId = productId;
+        this.product = product;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
     }
@@ -29,12 +37,12 @@ public class CartItem {
         this.id = id;
     }
 
-    public int getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public int getQuantity() {
@@ -52,5 +60,9 @@ public class CartItem {
     public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
     }
-    
+
+    @Override
+    public String toString() {
+        return "CartItem{" + "id=" + id + ", product=" + product + ", quantity=" + quantity + ", totalPrice=" + totalPrice + '}';
+    }
 }

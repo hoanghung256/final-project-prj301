@@ -26,6 +26,18 @@ public class Product {
 
     public Product() {
     }
+    
+    public Product(int id, int price) {
+        this.id = id;
+        this.price = price;
+    }
+
+    public Product(int id, String productName, int price, String avatarUrl) {
+        this.id = id;
+        this.productName = productName;
+        this.price = price;
+        this.avatarUrl = avatarUrl;
+    }
 
     public Product(int id, String productName, int sellBy, int categoryId, String description, int price, int quantity, int sold, LocalDateTime createAt, LocalDateTime updateAt, int totalBuy, String avatarUrl) {
         this.id = id;
@@ -142,8 +154,4 @@ public class Product {
     public String toString() {
         return "Product{" + "id=" + id + ", productName=" + productName + ", sellBy=" + sellBy + ", categoryId=" + categoryId + ", description=" + description + ", price=" + price + ", quantity=" + quantity + ", sold=" + sold + ", createAt=" + createAt + ", updateAt=" + updateAt + ", totalBuy=" + totalBuy + ", avatarUrl=" + avatarUrl + '}';
     }
-    
-    
-
-    
 }
