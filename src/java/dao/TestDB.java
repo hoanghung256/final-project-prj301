@@ -9,19 +9,12 @@ import model.Product;
 
 /**
  *
- * @author This PC
+ * @author ASUS
  */
 public class TestDB {
-
     public static void main(String[] args) {
-//        ProductDAO productDAO = new ProductDAO();
-//
-//        productDAO.getProducts(1,40);
-//
-//        // List all products
-//        List<Product> products = productDAO.getProducts(1,40);
-//        for (Product product : products) {
-//            System.out.println(product);
-//        }
+        ProductDAO dao = new ProductDAO();
+        List<Product> list = dao.getAllProduct();
+        System.out.println(list);
     }
 }

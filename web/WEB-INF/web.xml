@@ -29,7 +29,7 @@
         <filter-name>RoleFilter</filter-name>
         <url-pattern>/shop/*</url-pattern>
     </filter-mapping>
-    <error-page>
+   <error-page>
         <error-code>404</error-code>
         <location>/error/404-error.jsp</location>
     </error-page>
@@ -37,14 +37,7 @@
         <error-code>304</error-code>
         <location>/error/304-error.jsp</location>
     </error-page>
-    <servlet>
-        <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>controller.LoginServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/LoginServlet</url-pattern>
-    </servlet-mapping>
+  
     <session-config>
         <session-timeout>
             30

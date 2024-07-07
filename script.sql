@@ -102,7 +102,7 @@ CREATE TABLE [ReviewReply] (
 -- Insert data into ReviewReply table
 INSERT INTO [ReviewReply] ([reviewId], [content])
 VALUES
-(1, 'Thank you for your feedback!')
+(3, 'Thank you for your feedback!')
 
 -- Create ProductImage table which references Product
 CREATE TABLE [ProductImage] (
@@ -185,43 +185,6 @@ INSERT INTO [Product] ([productName], [sellBy], [categoryId], [description], [pr
 VALUES
 ('knife', 1, 2, 'A comfortable knife', 1000, 'https://i.pinimg.com/564x/0d/35/c5/0d35c5fad1af587657a2680d474ba503.jpg')
 
--- Delete product with id 2
-DELETE FROM Product 
-WHERE id = 2
-
--- Update product with id 4
-UPDATE [Product]
-SET
-    [productName] = 'knife',
-    [sellBy] = 2,
-    [categoryId] = 3,
-    [description] = 'A sharp knife',
-    [price] = 100,
-    [quantity] = 50,
-    [sold] = 10,
-    [updateAt] = GETDATE()
-
-
-
-	-- Insert 100 products into Product table
-DECLARE @i INT = 1;
-
-WHILE @i <= 100
-BEGIN
-    INSERT INTO [Product] ([productName], [sellBy], [categoryId], [description], [price], [quantity], [sold], [avatarUrl])
-    VALUES
-    ('Product ' + CAST(@i AS VARCHAR(3)), 
-     1, 
-     (SELECT TOP 1 [id] FROM [Category] ORDER BY NEWID()), 
-     'Description for Product ' + CAST(@i AS VARCHAR(3)), 
-     1000 + (@i * 10), 
-     50 + @i, 
-     10, 
-     'https://i.pinimg.com/564x/0d/35/c5/0d35c5fad1af587657a2680d474ba503.jpg');
-    
-    SET @i = @i + 1;
-END;
-=======
 INSERT INTO PaymentType(paymentName) 
 VALUES 
 	('COD'), 

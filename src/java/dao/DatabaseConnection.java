@@ -19,8 +19,9 @@ import java.util.logging.Logger;
 public class DatabaseConnection {
     private static Connection connection;
     private static final String URL = "jdbc:sqlserver://localhost:1433;database=FinalProjectPRJ301;encrypt=true;trustServerCertificate=true;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
-    private static final String USERNAME = "sa";
-    private static final String PASSWORD = "abc123";
+  
+    private static final String USERNAME = "";
+    private static final String PASSWORD = "";
     
     public DatabaseConnection() {
     }
