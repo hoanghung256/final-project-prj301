@@ -185,3 +185,7 @@ INSERT INTO [Product] ([productName], [sellBy], [categoryId], [description], [pr
 VALUES
 ('knife', 1, 2, 'A comfortable knife', 1000, 'https://i.pinimg.com/564x/0d/35/c5/0d35c5fad1af587657a2680d474ba503.jpg')
 
+INSERT INTO PaymentType(paymentName) 
+VALUES 
+	('COD'), 
+	('QR CODE')
