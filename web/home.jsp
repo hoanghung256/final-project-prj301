@@ -12,6 +12,11 @@
         <input type="hidden" name="command" value="LOAD"/>
         <button type="submit">Go to Product Details</button>
     </form>
+    
+    <form action="OrderDetailsController" method="GET">
+        <input type="hidden" name="command" value="LOAD"/>
+        <button type="submit">Order Details List</button>
+    </form>
     <h1>Content go here!</h1>
     <h1>Content go here!</h1>
     <h1>Content go here!</h1>

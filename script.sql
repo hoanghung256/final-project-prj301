@@ -172,7 +172,6 @@ CREATE TABLE [OrderDetail] (
 	[productId] INT,
 	[orderId] INT,
 	[quantity] INT,
-	[totalPrice] INT,
 	[status] VARCHAR(50) DEFAULT 'CONFIRMATION_WAITING', -- 'PREPARING' 'DELIVERING' 'DELIVERED'
 	[deliveryAddress] NVARCHAR(MAX),
 	CONSTRAINT PK_OrderDetail PRIMARY KEY ([id]),
@@ -184,6 +183,19 @@ CREATE TABLE [OrderDetail] (
 INSERT INTO [Product] ([productName], [sellBy], [categoryId], [description], [price], [avatarUrl])
 VALUES
 ('knife', 1, 2, 'A comfortable knife', 1000, 'https://i.pinimg.com/564x/0d/35/c5/0d35c5fad1af587657a2680d474ba503.jpg')
+
+--Insert data into OrderDetail table
+INSERT INTO [OrderDetail] ([productId], [orderId], [quantity], [status], [deliveryAddress])
+VALUES
+	(1, 1, 2, 'CONFIRMATION_WAITING', '21 Huynh Van Nghe'),
+	(2, 1, 1, 'PREPARING', '01 Thuy Son 4'),
+	(4, 3, 3, 'DELIVERED', '680 Tran Hung Dao');
+
+
+select OrderDetail.*,  Product.productName, Product.avatarUrl, Product.price, (OrderDetail.quantity * Product.price) AS totalPrice
+from OrderDetail
+join Product on OrderDetail.productId = Product.id
+where status IN ('DELIVERED', 'CONFIRMATION_WAITING', 'PREPARING')
 
 INSERT INTO PaymentType(paymentName) 
 VALUES 

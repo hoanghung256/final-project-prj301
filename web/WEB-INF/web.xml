@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
     <welcome-file-list>
-        <welcome-file>login.jsp</welcome-file>
+        <welcome-file>home.jsp</welcome-file>
     </welcome-file-list>
     <!--Filter order-->
     <filter>
@@ -29,7 +29,19 @@
         <filter-name>RoleFilter</filter-name>
         <url-pattern>/shop/*</url-pattern>
     </filter-mapping>
-   <error-page>
+    <servlet>
+        <servlet-name>ProductDetailsController</servlet-name>
+        <servlet-class>controller.ProductDetailsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderDetailsController</servlet-name>
+        <servlet-class>controller.OrderDetailsController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProductDetailsController</servlet-name>
+        <url-pattern>/ProductDetailsController</url-pattern>
+    </servlet-mapping>
+    <error-page>
         <error-code>404</error-code>
         <location>/error/404-error.jsp</location>
     </error-page>
@@ -37,7 +49,10 @@
         <error-code>304</error-code>
         <location>/error/304-error.jsp</location>
     </error-page>
-  
+    <servlet-mapping>
+        <servlet-name>OrderDetailsController</servlet-name>
+        <url-pattern>/OrderDetailsController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
