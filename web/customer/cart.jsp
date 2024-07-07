@@ -49,10 +49,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col" class="p-3">
-                                <input type="checkbox" onchange="getSubTotalOfAllItems()">
-                            </th>
-                            <th scope="col" colspan="2" class="p-3" style="width: 3rem;">Product</th>
+                            <th scope="col" colspan="3" class="text-center p-3" style="width: 3rem;">Product</th>
                             <th scope="col" class="p-3">Price</th>
                             <th scope="col" class="p-3" style="width: 0.5rem;">Quantity</th>
                             <th scope="col" class="p-3">Total</th>
@@ -63,14 +60,14 @@
                         <c:forEach var="item" items="${cartItems}">
                             <tr>
                                 <th style="width: 5rem;">
-                                    <input type="checkbox" onchange="handleChange(this)">
+                                    <input type="checkbox" onchange="handleChange(this)" id="checkbox-${item.id}">
                                 </th>
                                 <td style="width: 7rem;">
-                                    <img src="${item.product.avatarUrl}" class="img-thumbnail">
+                                    <img id="avatar-${item.id}" src="${item.product.avatarUrl}" class="img-thumbnail">
                                 </td>
                                 <td class="ms-3" style="width: 15rem;">
                                     <div>
-                                        <div class="product-name">${item.product.productName}</div>
+                                        <div class="product-name" id="product-name-${item.id}">${item.product.productName}</div>
                                         <div class="mt-2">
                                             <span class="return-display">Free return in 15 days</span>
                                         </div>
@@ -78,7 +75,7 @@
                                 </td>
                                 <td id="price">${item.product.price}</td>
                                 <td>
-                                    <input type="number" value="${item.quantity}" class="border-0 w-50">
+                                    <input type="number" id="quantity-${item.id}" value="${item.quantity}" class="border-0 w-50">
                                 </td>
                                 <td id="price" class="total-price text-info fs-5">${item.totalPrice}</td>
                                 <td>
@@ -104,16 +101,37 @@
                             <p class="fs-4">Estimate Total: <span class="total fs-4 text-primary" id="price">20000</span></p>
                         </div>
                         <div class="d-grid mx-auto mt-5">
-                            <button class="btn btn-success" onclick="sendCheckoutRequest()">Checkout</button>
+                            <button class="btn btn-success">
+                                <a href="order?" id="submit-button" class="text-decoration-none text-white">Checkout</a>
+                            </button>
+                            <p class="text-danger">${error}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div id=""class="d-none">Hello</div>
 </section>
 
 <script type="text/javascript">
+    document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                let submitButton = document.getElementById('submit-button');
+                let itemId = this.id.slice(9);
+                let quantityElement = document.getElementById("quantity-" + itemId);
+                let quantity = quantityElement ? quantityElement.value : 0;
+
+                submitButton.href = submitButton.href + "itemId=" + itemId + "&quantity=" + quantity + "&";
+
+                console.log(submitButton.href + "itemId=" + this.id.slice(9) + "&quantity=" + (document.getElementById("quantity-" +  this.id.slice(9)).textContent) + "&");
+            } else {
+                console.log('Checkbox ' + this.id + ' is unchecked');
+            }
+        });
+    });
+    
     function getSubTotalOfAllItems() {
         let total = 0;
         let rows = document.querySelectorAll("tbody tr");
