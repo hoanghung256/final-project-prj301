@@ -30,6 +30,18 @@ public class User {
     public User() {
     }
 
+    public User(String username, String password, String email, String phone, Gender gender, LocalDate dob, String address) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.gender = gender;
+        this.dob = dob;
+        this.address = address;
+    }
+    
+    
+
     public User(int id, String username, String password, String email, String phone, Gender gender, LocalDate dob,
             LocalDate joinAt, String avatarUrl, String address, Role role, int balance) {
         this.id = id;
