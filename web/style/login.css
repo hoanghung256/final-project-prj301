@@ -1,0 +1,82 @@
+/* Custom styles for login.jsp */
+
+.login-wrapper my-auto {
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center;
+    height: 100vh;
+    background-color: red;
+}
+
+.image-wrapper {
+    max-width: 100%;
+    text-align: center;
+    margin: 20px 0; /* Add margin to the top and bottom */
+}
+
+.image-wrapper img {
+    max-width: 80%; /* Adjusted width of the image */
+    height: auto;
+    border-radius: 10px; /* Rounded corners for the image */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Box shadow for the image */
+}
+
+.login-wrapper {
+    max-width: 400px; /* Limit width of login form */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Box shadow for the login form */
+}
+
+.login-wrapper h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.login-wrapper form {
+    margin-bottom: 20px;
+}
+
+.login-wrapper form label {
+    font-weight: bold;
+}
+
+.login-wrapper form input {
+    background-color: #C1F2C0; /* Background color for input fields */
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.login-wrapper form button {
+    margin-top: 10px;
+}
+
+.login-wrapper p {
+    text-align: center;
+    font-size: 14px;
+}
+
+.login-wrapper p a {
+    color: #007bff; /* Link color */
+    font-weight: bold;
+}
+
+.login-wrapper p a:hover {
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    /* Adjustments for smaller screens */
+    .login-section-wrapper, .bg-login {
+        justify-content: center;
+    }
+
+    .col-md-6 {
+        max-width: 100%;
+        flex-basis: 100%;
+    }
+}

@@ -4,3 +4,6 @@
 
 # Databse configuration
 /src/java/dao/DatabaseConnection.java
+
+#ignore .idea
+.idea/
