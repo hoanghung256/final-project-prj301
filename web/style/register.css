@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffcccb; /* Nền màu hồng nhạt */
+    margin: 0;
+    padding: 0;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Chiều cao toàn bộ viewport */
+}
+
+.title {
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+}
+
+form {
+    font-family: 'Times New Roman', serif;
+    background-color: snow;
+    padding: 40px;
+    border-radius: 6px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
+    max-width: 700px;
+    width: 100%;
+    font-size: 14px;
+    border: 3px solid darkslategray;
+    box-sizing: border-box;
+    position: relative; /* Đặt vị trí của form để các hình ảnh có thể được định vị tương đối */
+}
+
+
+label {
+    font-family: 'Verdana', sans-serif;
+}
+
+input[type="text"], input[type="password"], input[type="email"], input[type="date"], select {
+    font-family: 'Courier New', monospace;
+    
+}
+input[type="text"], 
+input[type="password"], 
+input[type="email"], 
+input[type="date"], 
+select {
+    font-family: 'Courier New', monospace;
+    background-color: #d0f0c0; /* Màu xanh lá cây nhạt cho nền của trường nhập liệu */
+    border: 1px solid #ccc; /* Viền của trường nhập liệu */
+    padding: 5px; /* Khoảng cách bên trong trường nhập liệu */
+    margin-bottom: -20px; /* Khoảng cách giữa các trường nhập liệu */
+    border-radius: 4px; /* Bo góc của trường nhập liệu */
+    box-sizing: border-box; /* Bao gồm padding và border vào chiều rộng */
+    width: calc(100% - 10px); /* Đảm bảo trường nhập liệu chiếm toàn bộ chiều rộng, trừ padding */
+}
+
+input[type="submit"] {
+    font-family: 'Helvetica', sans-serif;
+}
+
+.text-danger {
+    font-family: 'Verdana', sans-serif;
+    color: #dc3545;
+    text-align: center;
+    font-size: 18px;
+}
+
+.text-success {
+    color: #28a745;
+    text-align: center;
+    font-size: 18px;
+}
+
+
+.image-left, .image-top-right, .image-bottom-right {
+    position: absolute;
+}
+
+.image-left {
+    left: 170px; 
+    top: 45%;
+    transform: translateY(-50%);
+    width: 20%;
+    background-color: #ffcccb;
+}
+
+.image-top-right {
+    top: -10px; /* Đặt hình ảnh vào góc trên bên phải */
+    right: -10px; /* Điều chỉnh khoảng cách từ bên phải của form */
+    width: 20%; /* Kích thước cố định của hình ảnh */
+    height: auto;
+    background-color: #ffcccb;
+}
+
+.image-bottom-right {
+    bottom: -10px; /* Đặt hình ảnh vào góc dưới bên phải */
+    right: -10px; /* Điều chỉnh khoảng cách từ bên phải của form */
+    width: 20%; /* Kích thước cố định của hình ảnh */
+    height: auto;
+    background-color: #ffcccb;
+}
