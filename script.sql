@@ -25,8 +25,8 @@ CREATE TABLE [User] (
 -- Insert data into User table
 INSERT INTO [User] ([username], [password], [email], [phone], [gender], [dob], [address], [avatarUrl], [balance], [isShop], [isAdmin])
 VALUES 
-('Nguyen Minh Thang', '12345', 'anhnq@fpt.edu.vn', '0123456789', 'MALE', '2004-03-10', '35 Nguyen Dinh Hien', 'https://i.pinimg.com/564x/3d/46/ea/3d46ea3ac49f42439cf00d076cb9d626.jpg', 100000, 0, 0),
-('Nguyen Quoc Anh', '12345', 'anhnq@fpt.edu.vn', '0123456789', 'MALE', '2004-03-10', '35 Nguyen Dinh Hien', 'https://i.pinimg.com/564x/3d/46/ea/3d46ea3ac49f42439cf00d076cb9d626.jpg', 100000, 1, 0)
+('Nguyen Minh Thang', '10bcb537125063be473b781fc59e28a3b0282766e603d7261ec19abba603afa3', 'anhnq@fpt.edu.vn', '0123456789', 'MALE', '2004-03-10', '35 Nguyen Dinh Hien', 'https://i.pinimg.com/564x/3d/46/ea/3d46ea3ac49f42439cf00d076cb9d626.jpg', 100000, 0, 0),
+('Nguyen Quoc Anh', '10bcb537125063be473b781fc59e28a3b0282766e603d7261ec19abba603afa3', 'anhnq@fpt.edu.vn', '0123456789', 'MALE', '2004-03-10', '35 Nguyen Dinh Hien', 'https://i.pinimg.com/564x/3d/46/ea/3d46ea3ac49f42439cf00d076cb9d626.jpg', 100000, 1, 0)
 
 -- Create Category table
 CREATE TABLE [Category] (
@@ -189,3 +189,13 @@ INSERT INTO PaymentType(paymentName)
 VALUES 
 	('COD'), 
 	('QR CODE')
+
+
+SELECT
+     productName,
+     price,
+     avatarUrl, 
+FROM Cart
+INNER JOIN CartItem ON Cart.id = CartItem.cartId
+INNER JOIN Product ON CartItem.productId = Product.id
+WHERE id

@@ -16,7 +16,7 @@ import java.io.PrintWriter;
 import util.Hash;
 
 @WebServlet(name = "RegisterPageController", urlPatterns = "/register")
-public class RegisterPageController extends HttpServlet {
+public class RegisterController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

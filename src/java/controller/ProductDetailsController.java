@@ -6,6 +6,7 @@ package controller;
 
 import dao.ProductDAO;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import model.Product;
  *
  * @author ASUS
  */
+@WebServlet(name="ProductDetailController", urlPatterns={"/product-detail"})
 public class ProductDetailsController extends HttpServlet {
     
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -66,7 +68,7 @@ public class ProductDetailsController extends HttpServlet {
         String id = request.getParameter("id");
         Product product = dao.searchById(id);
         request.setAttribute("product", product);
-        request.getRequestDispatcher("product/product-details.jsp").forward(request, response);
+        request.getRequestDispatcher("product-details.jsp").forward(request, response);
     }
     
     @Override

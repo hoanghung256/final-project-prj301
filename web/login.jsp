@@ -5,17 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -41,13 +30,13 @@
                 <!-- Khu vực đăng nhập -->
                 <div class="login-wrapper my-auto">
                      <br> <br> <br>
-                    <h2>Đăng nhập</h2>
+                    <h2>Login</h2>
                      <br> <br> <br>
                     <form action="login" method="post">
-                        <label for="username">Tên đăng nhập:</label>
+                        <label for="username">Username:</label>
                         <input type="text" id="username" name="username" class="form-control" required>
                         <br>
-                        <label for="password">Mật khẩu:</label>
+                        <label for="password">Password:</label>
                         <input type="password" id="password" name="password" class="form-control" required>
                         <br>
                         <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
@@ -56,7 +45,7 @@
                     <c:if test="${not empty errorMessage}">
                         <div style="color:red;">${errorMessage}</div>
                     </c:if>
-                    <p>Nếu chưa có tài khoản, <a href="register.jsp">đăng ký ngay</a></p>
+                    <p>Does not have account, <a href="register.jsp">register now</a></p>
                 </div>
             </div>
         </div>

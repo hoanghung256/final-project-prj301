@@ -185,25 +185,7 @@ public class ProductDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            closeResources();
         }
         return count;
-    }
-
-    private void closeResources() {
-        try {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ps != null) {
-                ps.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 }

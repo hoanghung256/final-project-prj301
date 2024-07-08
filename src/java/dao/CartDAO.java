@@ -43,11 +43,12 @@ public class CartDAO {
                                                     "		INNER JOIN CartItem ON Cart.id = CartItem.cartId " +
                                                     "		INNER JOIN Product ON CartItem.productId = Product.id " +
                                                     "WHERE CartItem.id IN";
+    private final String GET_CART_ITEM_BY_PRODUCT_ID = "SELECT * FROM [Product] WHERE id=?";
     private final String ADD_ITEM_INTO_CART_BY_USER_ID = "INSERT INTO CartItem(cartId, productId, quantity) " +
                                                         "VALUES (" +
-                                                        "	(SELECT cartId FROM Cart WHERE userId=?), " +
-                                                        "	?, " +
-                                                        "	? " +
+                                                        "   (SELECT id FROM Cart WHERE userId=?), " +
+                                                        "   ?, " +
+                                                        "   ? " +
                                                         ")";
     private final String DELETE_ITEM_BY_ITEM_ID = "DELETE FROM CartItem WHERE id=?";
 //    private final String UPDATE_ITEM_QUANTITY_BY_ID = "UPDATE FROM CartItem SET quantity=? WHERE id=?";
@@ -86,7 +87,7 @@ public class CartDAO {
         return items;
     }
     
-    public List<CartItem> getCartItemByItemIds(String[] ids) {
+    public List<CartItem> getCartItemByItemIds(String... ids) {
         List<CartItem> items = new ArrayList<>();
         
         try {
@@ -123,7 +124,7 @@ public class CartDAO {
             PreparedStatement stm = conn.prepareStatement(ADD_ITEM_INTO_CART_BY_USER_ID);
             stm.setInt(1, userId);
             stm.setInt(2, item.getProduct().getId());
-            stm.setInt(2, item.getQuantity());
+            stm.setInt(3, item.getQuantity());
             
             int affected = stm.executeUpdate();
             isAdded = !Boolean.parseBoolean(String.valueOf(affected));
@@ -156,7 +157,34 @@ public class CartDAO {
         return isDeleted;
     }
     
-    private String insertIdIntoQuery(String query, String[] ids) {
+    public CartItem findProductForByNow(int productId, int buyQuantity) {
+        CartItem item = new CartItem();
+        
+        try {
+            PreparedStatement stm = conn.prepareStatement(GET_CART_ITEM_BY_PRODUCT_ID);
+            stm.setInt(1, productId);
+            ResultSet rs = stm.executeQuery();
+            
+            while (rs.next()) {
+                item = new CartItem(
+                        new Product(
+                                productId,
+                                rs.getString("productName"),
+                                rs.getInt("price"), 
+                                rs.getString("avatarUrl")
+                        ),
+                        rs.getInt("price") * buyQuantity
+                );
+            }
+            
+        } catch (SQLException e) {
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        
+        return item;
+    }
+    
+    private String insertIdIntoQuery(String query, String... ids) {
         StringBuilder queryBuilder = new StringBuilder(query);
         
         queryBuilder.append("(");

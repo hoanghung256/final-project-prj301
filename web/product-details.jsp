@@ -135,8 +135,20 @@
                    </div>
                     <p class="price">Price: <span id="price">${product.price}</span> </p>
                     <p class="short-description">${product.description}</p>
-                    <button class="buy-now">Buy Now</button>
-                    <button class="add-to-cart">Add to cart</button>
+                    <div class="d-flex">
+                        <form action="order" method="GET">
+                            <input type="hidden" name="productId" value="${product.id}">
+                            <input type="hidden" name="quantity" value="1">
+                            <input type="hidden" name="type" value="buy-now">
+                            <button type="submit" class="buy-now">Buy Now</button>
+                        </form>
+                        <form action="cart" method="POST">
+                            <input type="hidden" name="productId" value="${product.id}">
+                            <input type="hidden" name="productPrice" value="${product.price}">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="add-to-cart">Add to cart</button>
+                        </form>
+                    </div>
                    <div class="share">
                        <span>Share:</span>
                        <a href="Facebook.com">Facebook</a>

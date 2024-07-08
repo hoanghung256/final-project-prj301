@@ -102,7 +102,7 @@
                         </div>
                         <div class="d-grid mx-auto mt-5">
                             <button class="btn btn-success">
-                                <a href="order?" id="submit-button" class="text-decoration-none text-white">Checkout</a>
+                                <a href="order?type=from-cart" id="submit-button" class="text-decoration-none text-white">Checkout</a>
                             </button>
                             <p class="text-danger">${error}</p>
                         </div>
