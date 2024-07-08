@@ -28,36 +28,36 @@ public class ProductDAO {
     }
 
     //READ
-    public List<Product> getAllProduct(){
+    public List<Product> getAllProduct() {
         List<Product> list = new ArrayList<>();
         String query = "select * from Product";
         try {
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
-            while(rs.next()){
-                list.add(new Product(rs.getInt("id"), 
-                                     rs.getString("productName"),
-                                     rs.getInt("sellBy"),
-                                     rs.getInt("categoryID"),
-                                     rs.getString("description"),
-                                     rs.getInt("price"),
-                                     rs.getInt("quantity"),
-                                     rs.getInt("sold"),
-                                     rs.getTimestamp("createAt").toLocalDateTime(),
-                                     rs.getTimestamp("updateAt").toLocalDateTime(),
-                                     rs.getInt("totalBuy"),
-                                     rs.getString("avatarUrl")));  
+            while (rs.next()) {
+                list.add(new Product(rs.getInt("id"),
+                        rs.getString("productName"),
+                        rs.getInt("sellBy"),
+                        rs.getInt("categoryID"),
+                        rs.getString("description"),
+                        rs.getInt("price"),
+                        rs.getInt("quantity"),
+                        rs.getInt("sold"),
+                        rs.getTimestamp("createAt").toLocalDateTime(),
+                        rs.getTimestamp("updateAt").toLocalDateTime(),
+                        rs.getInt("totalBuy"),
+                        rs.getString("avatarUrl")));
             }
         } catch (Exception e) {
         }
         return list;
     }
-    
+
     //CREATE
-    public void createProduct(String productName, int sellBy, int categoryID, String description, int price, int quantity, String avatarUrl){
-        String query =  "INSERT INTO [Product] ([productName], [sellBy], [categoryId], [description], [price], [quantity], [avatarUrl])\n" +
-                        "VALUES\n" +
-                        "(?, ?, ?, ?, ?, ?, ?)";
+    public void createProduct(String productName, int sellBy, int categoryID, String description, int price, int quantity, String avatarUrl) {
+        String query = "INSERT INTO [Product] ([productName], [sellBy], [categoryId], [description], [price], [quantity], [avatarUrl])\n"
+                + "VALUES\n"
+                + "(?, ?, ?, ?, ?, ?, ?)";
         try {
             ps = conn.prepareStatement(query);
             ps.setString(1, productName);
@@ -71,11 +71,11 @@ public class ProductDAO {
         } catch (Exception e) {
         }
     }
-    
+
     //DELETE
-    public void deleteProduct(String id){
-        String query =  "delete from Product \n" +
-                        "where id = ?";
+    public void deleteProduct(String id) {
+        String query = "delete from Product \n"
+                + "where id = ?";
         try {
             ps = conn.prepareStatement(query);
             ps.setString(1, id);
@@ -83,23 +83,23 @@ public class ProductDAO {
         } catch (Exception e) {
         }
     }
-    
+
     //UPDATE
-    public void updateProduct(String id, String productName, int sellBy, int categoryId, String description, int price, int quantity, int sold, int totalBuy, String avatarUrl){
-        String query =  "UPDATE [Product]\n" +
-                        "SET\n" +
-                        "    [productName] = ?,\n" +
-                        "    [sellBy] = ?,\n" +
-                        "    [categoryId] = ?,\n" +
-                        "    [description] = ?,\n" +
-                        "    [price] = ?,\n" +
-                        "    [quantity] = ?,\n" +
-                        "    [sold] = ?,\n" +
-                        "    [updateAt] = GETDATE(),\n" +
-                        "    [totalBuy] = ?,\n" +
-                        "    [avatarUrl] = ?\n" +
-                        "WHERE [id] = ?";
-        
+    public void updateProduct(String id, String productName, int sellBy, int categoryId, String description, int price, int quantity, int sold, int totalBuy, String avatarUrl) {
+        String query = "UPDATE [Product]\n"
+                + "SET\n"
+                + "    [productName] = ?,\n"
+                + "    [sellBy] = ?,\n"
+                + "    [categoryId] = ?,\n"
+                + "    [description] = ?,\n"
+                + "    [price] = ?,\n"
+                + "    [quantity] = ?,\n"
+                + "    [sold] = ?,\n"
+                + "    [updateAt] = GETDATE(),\n"
+                + "    [totalBuy] = ?,\n"
+                + "    [avatarUrl] = ?\n"
+                + "WHERE [id] = ?";
+
         try {
             ps = conn.prepareStatement(query);
             ps.setString(1, productName);
@@ -116,34 +116,34 @@ public class ProductDAO {
         } catch (Exception e) {
         }
     }
-    
+
     //search by id
-    public Product searchById(String id){
-        String query =  "select * from Product\n" +
-                        "where id = ?";
+    public Product searchById(String id) {
+        String query = "select * from Product\n"
+                + "where id = ?";
         try {
             ps = conn.prepareStatement(query);
             ps.setString(1, id);
             rs = ps.executeQuery();
-            while(rs.next()){
-                return new Product(rs.getInt("id"), 
-                                     rs.getString("productName"),
-                                     rs.getInt("sellBy"),
-                                     rs.getInt("categoryID"),
-                                     rs.getString("description"),
-                                     rs.getInt("price"),
-                                     rs.getInt("quantity"),
-                                     rs.getInt("sold"),
-                                     rs.getTimestamp("createAt").toLocalDateTime(), 
-                                     rs.getTimestamp("updateAt").toLocalDateTime(),
-                                     rs.getInt("totalBuy"),
-                                     rs.getString("avatarUrl"));
+            while (rs.next()) {
+                return new Product(rs.getInt("id"),
+                        rs.getString("productName"),
+                        rs.getInt("sellBy"),
+                        rs.getInt("categoryID"),
+                        rs.getString("description"),
+                        rs.getInt("price"),
+                        rs.getInt("quantity"),
+                        rs.getInt("sold"),
+                        rs.getTimestamp("createAt").toLocalDateTime(),
+                        rs.getTimestamp("updateAt").toLocalDateTime(),
+                        rs.getInt("totalBuy"),
+                        rs.getString("avatarUrl"));
             }
         } catch (Exception e) {
         }
         return null;
     }
-    
+
     public List<Product> getProducts(int page, int pageSize) throws SQLException {
         if (pageSize <= 0) {
             throw new IllegalArgumentException("Page size must be greater than zero.");
@@ -205,5 +205,34 @@ public class ProductDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Product> searchProductsByName(String productName) {
+        List<Product> list = new ArrayList<>();
+        String sql = "SELECT * FROM Product WHERE productName LIKE ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, "%" + productName + "%");
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    list.add(new Product(
+                            rs.getInt("id"),
+                            rs.getString("productName"),
+                            rs.getInt("sellBy"),
+                            rs.getInt("categoryID"),
+                            rs.getString("description"),
+                            rs.getInt("price"),
+                            rs.getInt("quantity"),
+                            rs.getInt("sold"),
+                            rs.getTimestamp("createAt").toLocalDateTime(),
+                            rs.getTimestamp("updateAt").toLocalDateTime(),
+                            rs.getInt("totalBuy"),
+                            rs.getString("avatarUrl")
+                    ));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }

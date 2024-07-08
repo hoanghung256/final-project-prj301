@@ -1,9 +1,3 @@
-<%-- 
-    Document   : home-page
-    Created on : Jul 1, 2024, 5:15:12 PM
-    Author     : This PC
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -24,12 +18,9 @@
                 height: 100%;
                 object-fit: contain;
             }
-
-
             .product-card {
                 margin-bottom: 20px;
             }
-
         </style>
     </head>
     <body>
@@ -38,41 +29,48 @@
             <div class="banner">
                 <!-- Banner content here -->
             </div>
-
             <div class="row">
                 <div class="col-12">
                     <h3>Suggest Today</h3>
                 </div>
             </div>
-
             <div class="row">
-                <c:forEach var="product" items="${products}">
-                    <div class="col-md-3 product-card">
-                        <div class="card">
-                            <a href="ProductDetailsController?command=LOAD&id=${product.id}">
-                                <div class="product-image img-fluid">
-                                    <img src="${product.avatarUrl}" alt="${product.productName}" class="img-fluid">
-                                </div>
-                            </a>
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <a href="ProductDetailsController?command=LOAD&id=${product.id}" style="text-decoration: none;">
-                                        ${product.productName}
+                <c:choose>
+                    <c:when test="${empty products}">
+                        <div class="col-12">
+                            <p class="text-center">No products found.</p>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <c:forEach var="product" items="${products}">
+                            <div class="col-md-3 product-card">
+                                <div class="card">
+                                    <a href="ProductDetailsController?command=LOAD&id=${product.id}">
+                                        <div class="product-image img-fluid">
+                                            <img src="${product.avatarUrl}" alt="${product.productName}" class="img-fluid">
+                                        </div>
                                     </a>
-                                </h5>
-                                <p class="card-text">On sale</p>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <p class="card-text">Price: ${product.price}</p>
-                                    </div>
-                                    <div class="col-6">
-                                        <p class="card-text">Sold: ${product.sold}</p>
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <a href="ProductDetailsController?command=LOAD&id=${product.id}" style="text-decoration: none;">
+                                                ${product.productName}
+                                            </a>
+                                        </h5>
+                                        <p class="card-text">On sale</p>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <p class="card-text">Price: ${product.price}</p>
+                                            </div>
+                                            <div class="col-6">
+                                                <p class="card-text">Sold: ${product.sold}</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </c:forEach>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
         <nav aria-label="Page navigation example">
