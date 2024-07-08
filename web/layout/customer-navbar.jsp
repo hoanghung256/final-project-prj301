@@ -63,10 +63,10 @@
                     <input type="hidden" name="command" value="SEARCH">
                 </form>
                 <div class="d-flex align-items-center ml-3">
-                    <a href="customer/cart.jsp"> <!-- Liên k?t ??n trang gi? hàng -->
+                    <a href="customer/cart.jsp">
                         <img src="https://png.pngtree.com/png-clipart/20230812/original/pngtree-trolley-symbol-buying-basket-vector-picture-image_10434634.png" alt="Cart Logo" class="logo logo-extra">
                     </a>
-                    <a href="customer/account.jsp"> <!-- Liên k?t ??n trang tài kho?n -->
+                    <a href="useraccount?username=${sessionScope.loggedInUser}"> 
                         <img src="https://static.vecteezy.com/system/resources/previews/006/732/119/large_2x/account-icon-sign-symbol-logo-design-free-vector.jpg" alt="Account Logo" class="logo logo-account">
                     </a>
                 </div>

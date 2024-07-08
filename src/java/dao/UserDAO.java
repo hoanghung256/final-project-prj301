@@ -1,4 +1,6 @@
 package dao;
+
+import enums.Gender;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -24,13 +26,13 @@ public class UserDAO {
         ResultSet resultSet = null;
 
         try {
-            String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+            String sql = "SELECT * FROM [User] WHERE username = ? AND password = ?";
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
-            
+
             resultSet = preparedStatement.executeQuery();
-            
+
             if (resultSet.next()) {
                 isValid = true;
             }
@@ -38,13 +40,17 @@ public class UserDAO {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
-                if (resultSet != null) resultSet.close();
-                if (preparedStatement != null) preparedStatement.close();
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         return isValid;
     }
 
@@ -55,12 +61,12 @@ public class UserDAO {
         ResultSet resultSet = null;
 
         try {
-            String sql = "SELECT * FROM users WHERE username = ?";
+            String sql = "SELECT * FROM [User] WHERE username = ?";
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, username);
-            
+
             resultSet = preparedStatement.executeQuery();
-            
+
             if (resultSet.next()) {
                 user = new User();
                 user.setUsername(resultSet.getString("username"));
@@ -70,13 +76,17 @@ public class UserDAO {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
-                if (resultSet != null) resultSet.close();
-                if (preparedStatement != null) preparedStatement.close();
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         return user;
     }
 
@@ -86,12 +96,12 @@ public class UserDAO {
         PreparedStatement preparedStatement = null;
 
         try {
-            String sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO [User] (username, password, email) VALUES (?, ?, ?)";
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getEmail());
-            
+
             int rowsInserted = preparedStatement.executeUpdate();
             if (rowsInserted > 0) {
                 success = true;
@@ -100,27 +110,18 @@ public class UserDAO {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
-                if (preparedStatement != null) preparedStatement.close();
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         return success;
     }
 
-    // Các phương thức khác như update, delete có thể được triển khai tương tự
-
-    // Đóng kết nối
-    public void closeConnection() {
-        try {
-            if (conn != null) {
-                conn.close();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    
 
     public boolean isUsernameExists(String username) {
         String query = "SELECT COUNT(*) FROM [User] WHERE username = ?";
@@ -136,7 +137,6 @@ public class UserDAO {
         return false;
     }
 
-    // Kiểm tra xem email đã tồn tại chưa
     public boolean isEmailExists(String email) {
         String query = "SELECT COUNT(*) FROM [User] WHERE email = ?";
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -167,5 +167,49 @@ public class UserDAO {
             e.printStackTrace();
         }
     }
-}
 
+    private Gender getGenderFromString(String genderStr) {
+        try {
+            return Gender.valueOf(genderStr.toUpperCase());
+        } catch (IllegalArgumentException | NullPointerException e) {
+            
+            return Gender.OTHER; 
+        }
+    }
+
+    public User getUserProfileByUsername(String username) {
+        User user = null;
+        String sql = "SELECT username, email, phone, gender, dob, address FROM [User] WHERE username = ?";
+
+        try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setString(1, username);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    user = new User();
+                    user.setUsername(resultSet.getString("username"));
+                    user.setEmail(resultSet.getString("email"));
+                    user.setPhone(resultSet.getString("phone"));
+                    user.setGender(getGenderFromString(resultSet.getString("gender")));
+                    user.setDob(resultSet.getDate("dob").toLocalDate());
+                    user.setAddress(resultSet.getString("address"));
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return user;
+    }
+    // Các phương thức khác như update, delete có thể được triển khai tương tự
+    // Đóng kết nối
+    public void closeConnection() {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+}
