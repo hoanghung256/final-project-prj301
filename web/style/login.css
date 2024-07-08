@@ -1,82 +1,89 @@
-/* Custom styles for login.jsp */
-
-.login-wrapper my-auto {
-    display: flex;
-    justify-content: center; /* Center the content horizontally */
-    align-items: center;
-    height: 100vh;
-    background-color: red;
+html, body {
+    height: 100%;
+    margin: 0;
+    background-color: #fbdada;
 }
 
-.image-wrapper {
-    max-width: 100%;
-    text-align: center;
-    margin: 20px 0; /* Add margin to the top and bottom */
+.container-fluid {
+    height: 100%;
+    position: relative;
+}
+
+.bg-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fbdada;
 }
 
 .image-wrapper img {
-    max-width: 80%; /* Adjusted width of the image */
+    max-width: 80%;
     height: auto;
-    border-radius: 10px; /* Rounded corners for the image */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Box shadow for the image */
+}
+
+.login-section-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fbdada;
+    padding-top: 80px; /* Điều chỉnh khoảng cách xuống 10px */
+    position: relative;
+}
+
+.logo-wrapper {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-family: 'Pacifico', cursive;
+}
+
+.logo {
+    max-width: 100px;
 }
 
 .login-wrapper {
-    max-width: 400px; /* Limit width of login form */
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Box shadow for the login form */
+    width: 60%; /* Giảm chiều rộng khu vực login */
+    padding: 20px; /* Giảm padding */
+    background-color: #ffffff;
+    border: 2px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif; /* Áp dụng font chữ Pacifico */
 }
 
-.login-wrapper h2 {
-    margin-bottom: 20px;
+h2 {
     text-align: center;
-}
-
-.login-wrapper form {
     margin-bottom: 20px;
 }
 
-.login-wrapper form label {
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-control {
+    background-color: #C1F2C0 !important; /* Sử dụng !important để đảm bảo áp dụng màu nền */
+    border: 1px solid #ccc; /* Đảm bảo có viền để hiển thị rõ */
+    box-shadow: none;
+    margin-bottom: 15px;
+    color: #000; /* Màu chữ cho form control */
+}
+
+.btn-primary {
+    background-color: #C1F2C0;
+    border: none;
+    color: #000;
     font-weight: bold;
 }
 
-.login-wrapper form input {
-    background-color: #C1F2C0; /* Background color for input fields */
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-    width: 100%;
-    margin-bottom: 10px;
+.btn-primary:hover {
+    background-color: #A9D99F;
 }
 
-.login-wrapper form button {
-    margin-top: 10px;
+.text-danger {
+    font-size: 0.9em;
 }
 
-.login-wrapper p {
-    text-align: center;
-    font-size: 14px;
-}
-
-.login-wrapper p a {
-    color: #007bff; /* Link color */
-    font-weight: bold;
-}
-
-.login-wrapper p a:hover {
-    text-decoration: none;
-}
-
-@media (max-width: 768px) {
-    /* Adjustments for smaller screens */
-    .login-section-wrapper, .bg-login {
-        justify-content: center;
-    }
-
-    .col-md-6 {
-        max-width: 100%;
-        flex-basis: 100%;
-    }
+.text-center a {
+    color: #007bff;
 }
