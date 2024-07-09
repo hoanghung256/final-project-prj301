@@ -20,15 +20,15 @@ public class DatabaseConnection {
     private static Connection connection;
     private static final String URL = "jdbc:sqlserver://localhost:1433;database=FinalProjectPRJ301;encrypt=true;trustServerCertificate=true;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
     private static final String USERNAME = "sa";
+
     private static final String PASSWORD = "30042004";
-    
+
     public DatabaseConnection() {
     }
     
     public static void createConnection() {
         try {
             DriverManager.registerDriver(new SQLServerDriver());
-
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
         } catch (SQLException e) {
             Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, e);
