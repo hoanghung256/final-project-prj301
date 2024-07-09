@@ -25,7 +25,6 @@
                 object-fit: contain;
             }
 
-
             .product-card {
                 margin-bottom: 20px;
             }
@@ -34,7 +33,7 @@
     </head>
     <body>
         <%@include file="../layout/customer-navbar.jsp" %>
-        <div class="container">
+        <div class="container col-12">
             <div class="banner">
                 <!-- Banner content here -->
             </div>

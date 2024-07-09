@@ -54,7 +54,7 @@ public class LoginServlet extends HttpServlet {
             if (resultSet.next()) {
                 // Session su dung de ghi nho user da tung dang nhap
                 request.getSession().setAttribute("loggedInUser", username);
-                response.sendRedirect("home.jsp");
+                response.sendRedirect("home-page");
             } else {
                 // Neu user khong ton tai, in ra tbao loi
                 request.setAttribute("errorMessage", "Wrong username or password!");
