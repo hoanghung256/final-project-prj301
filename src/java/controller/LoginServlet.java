@@ -34,6 +34,7 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("errorMessage", "Vui lòng nhập tên đăng nhập và mật khẩu!");
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
+            //ZOOOOOOOOOOOO
         }
 
         Connection connection = null;
