@@ -14,15 +14,21 @@ public class ProductImage {
     
     private int id;
     private int productId;
+    private String imageName;
     private String url;
     private LocalDate uploadedDate;   
 
     public ProductImage() {
     }
 
-    public ProductImage(int id, int productId, String url, LocalDate uploadedDate) {
+    public ProductImage(String url) {
+        this.url = url;
+    }
+
+    public ProductImage(int id, int productId, String imageName, String url, LocalDate uploadedDate) {
         this.id = id;
         this.productId = productId;
+        this.imageName = imageName;
         this.url = url;
         this.uploadedDate = uploadedDate;
     }
@@ -43,6 +49,14 @@ public class ProductImage {
         this.productId = productId;
     }
 
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
     public String getUrl() {
         return url;
     }
@@ -61,9 +75,6 @@ public class ProductImage {
 
     @Override
     public String toString() {
-        return "ProductImage{" + "id=" + id + ", productId=" + productId + ", url=" + url + ", uploadedDate=" + uploadedDate + '}';
+        return "ProductImage{" + "id=" + id + ", productId=" + productId + ", imageName=" + imageName + ", url=" + url + ", uploadedDate=" + uploadedDate + '}';
     }
-    
-    
-    
 }

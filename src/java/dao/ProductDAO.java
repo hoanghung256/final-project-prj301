@@ -68,6 +68,7 @@ public class ProductDAO {
             ps.setInt(6, quantity);
             ps.setString(7, avatarUrl);
             ps.executeUpdate();
+            System.out.println("called create product");
         } catch (Exception e) {
         }
     }
