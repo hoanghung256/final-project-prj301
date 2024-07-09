@@ -189,3 +189,23 @@ INSERT INTO PaymentType(paymentName)
 VALUES 
 	('COD'), 
 	('QR CODE')
+DECLARE @i INT = 1;
+
+WHILE @i <= 100
+BEGIN
+    INSERT INTO [Product] ([productName], [sellBy], [categoryId], [description], [price], [quantity], [sold], [avatarUrl])
+    VALUES
+    ('Product ' + CAST(@i AS VARCHAR(3)), 
+     1, 
+     (SELECT TOP 1 [id] FROM [Category] ORDER BY NEWID()), 
+     'Description for Product ' + CAST(@i AS VARCHAR(3)), 
+     1000 + (@i * 10), 
+     50 + @i, 
+     10, 
+     'https://i.pinimg.com/564x/0d/35/c5/0d35c5fad1af587657a2680d474ba503.jpg');
+    
+    SET @i = @i + 1;
+END;
+
+UPDATE Product
+SET avatarUrl = 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
