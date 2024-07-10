@@ -5,6 +5,8 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -22,7 +24,7 @@ public class Product {
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
     private int totalBuy;
-    private String avatarUrl;
+    private List<ProductImage> images;
 
     public Product() {
     }
@@ -36,7 +38,8 @@ public class Product {
         this.id = id;
         this.productName = productName;
         this.price = price;
-        this.avatarUrl = avatarUrl;
+        this.images = new ArrayList<>();
+        this.images.add(new ProductImage(avatarUrl));
     }
 
     public Product(int id, String productName, int sellBy, int categoryId, String description, int price, int quantity, int sold, LocalDateTime createAt, LocalDateTime updateAt, int totalBuy, String avatarUrl) {
@@ -51,7 +54,8 @@ public class Product {
         this.createAt = createAt;
         this.updateAt = updateAt;
         this.totalBuy = totalBuy;
-        this.avatarUrl = avatarUrl;
+        this.images = new ArrayList<>();
+        this.images.add(new ProductImage(avatarUrl));
     }
 
     public int getId() {
@@ -142,16 +146,16 @@ public class Product {
         this.totalBuy = totalBuy;
     }
 
-    public String getAvatarUrl() {
-        return avatarUrl;
+    public void setImages(List<ProductImage> images) {
+        this.images = images;
     }
 
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
+    public List<ProductImage> getImages() {
+        return images;
     }
 
     @Override
     public String toString() {
-        return "Product{" + "id=" + id + ", productName=" + productName + ", sellBy=" + sellBy + ", categoryId=" + categoryId + ", description=" + description + ", price=" + price + ", quantity=" + quantity + ", sold=" + sold + ", createAt=" + createAt + ", updateAt=" + updateAt + ", totalBuy=" + totalBuy + ", avatarUrl=" + avatarUrl + '}';
+        return "Product{" + "id=" + id + ", productName=" + productName + ", sellBy=" + sellBy + ", categoryId=" + categoryId + ", description=" + description + ", price=" + price + ", quantity=" + quantity + ", sold=" + sold + ", createAt=" + createAt + ", updateAt=" + updateAt + ", totalBuy=" + totalBuy + ", avatarUrl=" + images + '}';
     }
 }
