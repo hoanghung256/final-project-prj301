@@ -101,8 +101,8 @@
                     </div>
                     
                     <div class="order-footer">
-                        <button class="item-price">Price: <span id="price"> ${x.price}</button>
-                        <button class="total">Total: <span id="price">${x.totalPrice}</button>
+                        <p class="item-price">Price: <span id="price"> ${x.price}</p>
+                        <p class="total">Total: <span id="price">${x.totalPrice}</p>
                     </div>
                 </div>
             </div>

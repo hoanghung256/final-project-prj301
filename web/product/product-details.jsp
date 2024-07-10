@@ -1,26 +1,11 @@
 <%-- 
     Document   : product-details
-    Created on : Jul 1, 2024, 4:39:01?PM
+    Created on : Jul 1, 2024, 4:39:01 PM
     Author     : ASUS
 --%>
 <%@ include file="../layout/customer-navbar.jsp" %>
-
-            <style>
-/*           body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}*/
-
-/*.container {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}*/
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<style>
 
 .product {
     display: flex;
@@ -28,8 +13,10 @@
 }
 
 .product-image img {
-    width: 500px;
-    height: auto;
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    margin-bottom: 10px;
 }
 
 .product-details {
@@ -113,37 +100,74 @@
 .share a:hover {
     text-decoration: underline;
 }
-        </style>
+
+.product-image-detail {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.product-image-detail img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    cursor: pointer; /* Changes cursor to pointer */
+}
+
+.short-description {
+    margin-top: 10px;
+}
+</style>
+
 <section>
-        <div class="container">
-           <div class="product">
-               <div class="product-image">
-                   <img src="${product.avatarUrl}" alt="Product Image">
-               </div>
-               <div class="product-details">
-                   <h2>${product.productName}</h2>
-                   <div class="ratings">
-                       <div class="stars">
-                           <span>&#9733;</span>
-                           <span>&#9733;</span>
-                           <span>&#9733;</span>
-                           <span>&#9733;</span>
-                           <span>&#9734;</span> 
-                       </div>
-                       <span class="review-count">4.0 (200 Feedback)</span>
-                       <span class="sold-count">| Sold: ${product.sold}</span>
-                   </div>
-                    <p class="price">Price: <span id="price">${product.price}</span> </p>
-                    <p class="short-description">${product.description}</p>
-                    <button class="buy-now">Buy Now</button>
-                    <button class="add-to-cart">Add to cart</button>
-                   <div class="share">
-                       <span>Share:</span>
-                       <a href="Facebook.com">Facebook</a>
-                       <a href="#">Instagram</a>
-                   </div>
-               </div>
-           </div>
-       </div>
+    <div class="container">
+        <div class="product row">
+            <div class="col-6">
+                <div class="product-image img-fluid">
+                    <img id="mainImage" src="${product.avatarUrl}" alt="Main Product Image">
+                </div>
+                
+                <div class="product-image-detail">
+                    <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Product Thumbnail 1" onclick="changeImage(this)">
+                    <img src="${product.avatarUrl}" onclick="changeImage(this)">
+                    <img src="${product.avatarUrl}" onclick="changeImage(this)">
+                    <img src="${product.avatarUrl}" onclick="changeImage(this)">
+                </div>
+            </div>
+            
+            <div class="product-details col-4">
+                <div class="mt-2">                
+                    <h2>${product.productName}</h2>
+                </div>
+                <div class="ratings">
+                    <div class="stars">
+                        <span>&#9733;</span>
+                        <span>&#9733;</span>
+                        <span>&#9733;</span>
+                        <span>&#9733;</span>
+                        <span>&#9734;</span>
+                    </div>
+                    <span class="review-count">4.0 (140 Feedback)</span>
+                    <span class="sold-count">| Sold: ${product.sold}</span>
+                </div>
+                <p class="price">Price: <span id="price">${product.price}</span> </p>
+                <button class="buy-now">Buy Now</button>
+                <button class="add-to-cart">Add to cart</button>
+                <div class="share">
+                    <span>Share:</span>
+                    <a href="https://facebook.com">Facebook</a>
+                    <a href="https://instagram.com">Instagram</a>
+                </div>
+                <p class="short-description">${product.description}</p>
+            </div>
+        </div>
+    </div>
 </section>
+                
+<script>
+    function changeImage(element) {
+        var mainImage = document.getElementById("mainImage");
+        mainImage.src = element.src;
+    }
+</script>
 <%@ include file="../layout/customer-footer.jsp" %>
