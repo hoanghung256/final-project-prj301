@@ -1,82 +1,90 @@
-/* Custom styles for login.jsp */
+/* style/login.css */
 
-.login-wrapper my-auto {
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa; /* Background color for the entire page */
+}
+
+.container {
+    height: 100%;
     display: flex;
-    justify-content: center; /* Center the content horizontally */
     align-items: center;
-    height: 100vh;
-    background-color: red;
-}
-
-.image-wrapper {
-    max-width: 100%;
-    text-align: center;
-    margin: 20px 0; /* Add margin to the top and bottom */
-}
-
-.image-wrapper img {
-    max-width: 80%; /* Adjusted width of the image */
-    height: auto;
-    border-radius: 10px; /* Rounded corners for the image */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Box shadow for the image */
+    justify-content: center;
 }
 
 .login-wrapper {
-    max-width: 400px; /* Limit width of login form */
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Box shadow for the login form */
-}
-
-.login-wrapper h2 {
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.login-wrapper form {
-    margin-bottom: 20px;
-}
-
-.login-wrapper form label {
-    font-weight: bold;
-}
-
-.login-wrapper form input {
-    background-color: #C1F2C0; /* Background color for input fields */
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
     width: 100%;
-    margin-bottom: 10px;
-}
-
-.login-wrapper form button {
-    margin-top: 10px;
-}
-
-.login-wrapper p {
+    max-width: 400px; /* Adjust max-width as needed */
+    padding: 30px;
+    background-color: #ffffff;
+    border: 1px solid #ced4da; /* Soft border */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    font-size: 14px;
 }
 
-.login-wrapper p a {
-    color: #007bff; /* Link color */
+h2 {
+    font-size: 2.5rem; /* Larger font size for heading */
+    font-family: 'Lobster', cursive;
+    background: linear-gradient(90deg, #ff7e5f, #feb47b); /* Gradient text color */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Text shadow for better contrast */
+    margin-bottom: 30px; /* Increased margin */
+}
+
+.form-group label {
     font-weight: bold;
 }
 
-.login-wrapper p a:hover {
+.form-control {
+    border-radius: 20px;
+    padding: 12px; /* Increased padding for better touch usability */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #007bff; /* Focus color */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Focus shadow */
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 20px;
+    padding: 12px 20px; /* Increased padding */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker hover color */
+}
+
+.form-check-label {
+    font-weight: normal;
+}
+
+a {
+    color: #007bff;
     text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+.text-danger {
+    color: #dc3545;
 }
 
 @media (max-width: 768px) {
-    /* Adjustments for smaller screens */
-    .login-section-wrapper, .bg-login {
-        justify-content: center;
-    }
-
-    .col-md-6 {
-        max-width: 100%;
-        flex-basis: 100%;
+    .login-wrapper {
+        padding: 20px;
     }
 }

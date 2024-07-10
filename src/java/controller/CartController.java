@@ -11,9 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import model.CartItem;
 import model.Product;
 import model.User;
@@ -50,7 +48,8 @@ public class CartController extends HttpServlet {
         if (processRequest(req, resp)) return;
         
         User user = (User) req.getSession().getAttribute("userInfo");
-        List<CartItem> cartItems = dbContext.getOrderItemsByUserId(user.getId());
+        System.out.println("user infor " + user);
+        List<CartItem> cartItems = dbContext.getOrderItemsByUserId(1);
         
         req.setAttribute("cartItems", cartItems);
         req.getRequestDispatcher("customer/cart.jsp").forward(req, resp);

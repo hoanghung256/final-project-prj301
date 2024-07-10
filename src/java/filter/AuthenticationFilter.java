@@ -28,7 +28,7 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
 
-        User u = (User) Cookiez.get("userInfo", httpRequest);
+        User u = (User) httpRequest.getSession().getAttribute("userInfo");
         
         if (u == null) {
             httpResponse.sendRedirect("login.jsp");

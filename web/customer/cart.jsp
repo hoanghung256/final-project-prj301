@@ -10,12 +10,14 @@
     .order-estimate {
         min-height: 20rem;
         border-radius: 0.2rem;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     }
     
     .img-thumbnail {
         width: 100px;
         height: 100px;
         object-fit: cover;
+        border-radius: 0.2rem;
     }
     
     .product-name {
@@ -27,18 +29,57 @@
         max-width: 15rem;
         max-height: calc(2 * 1.2em);
         line-height: 1.2em;
+        font-size: 0.9rem;
+        font-weight: 500;
     }
     
     .return-display {
         color: orangered;
         border: 0.5px solid orangered;
         border-radius: 0.1rem;
-        padding: 0.1rem;
+        padding: 0.1rem 0.5rem;
         font-size: 0.7rem;
     }
     
     .quantity-icon {
         cursor: pointer;
+    }
+
+    .table th, .table td {
+        vertical-align: middle;
+    }
+
+    .table thead th {
+        font-weight: 600;
+        background-color: #f8f9fa;
+        border-top: none;
+        border-bottom: 1px solid #dee2e6;
+        text-transform: uppercase;
+    }
+
+    .table tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+
+    .total-price {
+        font-size: 1.1rem;
+        font-weight: bold;
+    }
+
+    .btn-checkout {
+        background-color: #28a745;
+        border-color: #28a745;
+        transition: all 0.3s ease;
+    }
+
+    .btn-checkout:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+
+    .text-danger {
+        font-size: 0.9rem;
+        font-weight: 500;
     }
 </style>
 
@@ -102,7 +143,7 @@
                         </div>
                         <div class="d-grid mx-auto mt-5">
                             <button class="btn btn-success">
-                                <a href="order?" id="submit-button" class="text-decoration-none text-white">Checkout</a>
+                                <a href="order?type=from-cart" id="submit-button" class="text-decoration-none text-white">Checkout</a>
                             </button>
                             <p class="text-danger">${error}</p>
                         </div>

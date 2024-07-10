@@ -23,7 +23,7 @@ import model.Product;
  *
  * @author This PC
  */
-@WebServlet(name="HomeController", urlPatterns={"/home-page"})
+@WebServlet(name="HomeController", urlPatterns={"/home"})
 public class HomeController extends HttpServlet {
     private static final Logger LOGGER = Logger.getLogger(HomeController.class.getName());
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -74,13 +74,14 @@ public class HomeController extends HttpServlet {
         request.setAttribute("products", list);
         
         int totalProducts = productDAO.countProducts();
-        int totalPages = (int) Math.ceilDiv(totalProducts, pageSize);//divide num of product to page size (40) and ceil to get the number of pages
+        int totalPages = (int) ceilDiv(totalProducts, pageSize);//divide num of product to page size (40) and ceil to get the number of pages
         
         request.setAttribute("currentPage", page);
         request.setAttribute("totalPages", totalPages);
         
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/home/home-page.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
         dispatcher.forward(request, response);
+        System.out.println(totalProducts);
         System.out.println(totalPages);
         System.out.println(list);
     }
@@ -94,4 +95,7 @@ public class HomeController extends HttpServlet {
         return "Short description";
     }
     
+    private double ceilDiv(int totalProducts, int pageSize) {
+        return Math.ceil((double)totalProducts / pageSize);
+    }
 }

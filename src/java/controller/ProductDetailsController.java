@@ -19,7 +19,7 @@ import model.Product;
  *
  * @author ASUS
  */
-@WebServlet(name = "ProductDetailsController", urlPatterns = {"/ProductDetailsController"})
+@WebServlet(name="ProductDetailController", urlPatterns={"/product-detail"})
 public class ProductDetailsController extends HttpServlet {
     
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -68,7 +68,7 @@ public class ProductDetailsController extends HttpServlet {
         String id = request.getParameter("id");
         Product product = dao.searchById(id);
         request.setAttribute("product", product);
-        request.getRequestDispatcher("product/product-details.jsp").forward(request, response);
+        request.getRequestDispatcher("product-details.jsp").forward(request, response);
     }
     
     @Override

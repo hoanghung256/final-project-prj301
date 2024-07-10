@@ -28,7 +28,7 @@ public class RoleFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpResponse = (HttpServletResponse) servletRequest;
 
-        User u = (User) Cookiez.get("userInfo", httpRequest);
+        User u = (User) (User) httpRequest.getSession().getAttribute("userInfo");
         
         if (u.getRole() != Role.SHOP) {
             httpResponse.sendRedirect("304-error.jsp");

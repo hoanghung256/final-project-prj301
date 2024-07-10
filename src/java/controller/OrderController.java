@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import model.CartItem;
 import model.User;
@@ -50,20 +51,33 @@ public class OrderController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (processRequest(req, resp)) return;
         
-        String[] ids = req.getParameterValues("itemId");
-        String[] quantities = req.getParameterValues("quantity");
+        String type = req.getParameter("type");
         
-        if (ids == null || quantities == null) {
-            req.setAttribute("error", "You have not choose any item!");
-            req.getRequestDispatcher("cart").forward(req, resp);
+        if ("from-cart".equals(type)) {
+            String[] ids = req.getParameterValues("itemId");
+            String[] quantities = req.getParameterValues("quantity");
+
+            if (ids == null || quantities == null) {
+                req.setAttribute("error", "You have not choose any item!");
+                req.getRequestDispatcher("cart").forward(req, resp);
+            }
+
+            List<CartItem> items = new CartDAO().getCartItemByItemIds(ids);
+            processQuantity(items, ids, quantities);
+
+            req.getSession().setAttribute("orderItems", items);
+            req.getRequestDispatcher("customer/order.jsp").forward(req, resp);
+        } else if ("buy-now".equals(type)) {
+            int id = Integer.parseInt(req.getParameter("productId"));
+            int quantity = Integer.parseInt(req.getParameter("quantity"));
+            
+            CartItem item = new CartDAO().findProductForByNow(id, quantity);
+            List<CartItem> items = new ArrayList<>();
+            items.add(item);
+            
+            req.getSession().setAttribute("orderItems", items);
+            req.getRequestDispatcher("customer/order.jsp").forward(req, resp);
         }
-        
-        List<CartItem> items = new CartDAO().getCartItemByItemIds(ids);
-        processQuantity(items, ids, quantities);
-        
-        req.getSession().setAttribute("orderItems", items);
-        
-        req.getRequestDispatcher("customer/order.jsp").forward(req, resp);
     }
 
     /**
@@ -76,9 +90,7 @@ public class OrderController extends HttpServlet {
         String address = req.getParameter("address");
         PaymentType paymentType = PaymentType.valueOf(req.getParameter("paymentType"));
         
-//        int insertOrderId = dbContext.createOrderAndGetId(user.getId(), paymentType);
-        int insertOrderId = dbContext.createOrderAndGetId(1, paymentType);
-//        System.out.println("orderID: " + insertOrderId);
+        int insertOrderId = dbContext.createOrderAndGetId(user.getId(), paymentType);
         
         boolean isOrderCreated = dbContext.addOrderItem(insertOrderId, address, items);
         

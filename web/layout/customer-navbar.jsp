@@ -66,25 +66,35 @@
         width: 1.5rem;
         height: 1.5rem;
     }
+
+    .navbar-brand img {
+        max-height: 50px; /* Adjust the height as needed */
+        height: auto;
+        width: auto;
+    }
 </style>
 
 <header class="pb-5">
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light py-3" style="background-color: #e3f2fd">
         <div class="container">
-            <a class="navbar-brand" href="#">LOGO</a>
-            <div class="mx-auto">
-                <form class="d-flex" action="#" method="GET">
-                    <input class="form-control me-2 p-2" type="search" aria-label="Search">
-                    <button class="btn" type="submit">Search</button>
-                </form>
-            </div>
-            <div class="navbar-icons d-flex align-items-center">
-                <a href="cart.jsp" title="Cart">
-                    <img src="../image/shopping_cart_icon.png" alt="Cart" class="icon">
+            <div class="d-flex justify-content-between w-100">
+                <a class="navbar-brand" href="home">
+                    <img src="image/logo2.png" alt="Logo">
                 </a>
-                <a href="personal-account.jsp" title="User Profile">
-                    <img src="../image/account_icon.png" alt="User Profile" class="icon">
-                </a>
+                <div class="mx-auto">
+                    <form class="d-flex" action="#" method="GET">
+                        <input class="form-control me-2 p-2" type="search" aria-label="Search">
+                        <button class="btn" type="submit">Search</button>
+                    </form>
+                </div>
+                <div class="navbar-icons d-flex align-items-center">
+                    <a href="cart" title="Cart">
+                        <img src="https://img.icons8.com/?size=100&id=85080&format=png&color=000000" alt="Cart" class="icon">
+                    </a>
+                    <a href="customer-account" title="User Profile">
+                        <img src="https://img.icons8.com/?size=100&id=15263&format=png&color=000000" alt="User Profile" class="icon">
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
