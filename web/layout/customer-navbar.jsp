@@ -1,9 +1,3 @@
-<%-- 
-    Document   : customer-navbar
-    Created on : Jun 27, 2024, 9:56:36 PM
-    Author     : hoang hung 
---%>
-
 <%@ include file="./main-header.jsp" %>
 
 <style>
@@ -11,20 +5,66 @@
         width: 50rem;
         height: 2.5rem;
     }
-    
+
     .btn {
         border-color: black;
     }
-    
+
     main {
         background-color: rgba(241, 241, 241, 1);
     }
-    
+
     .body-content {
         margin-left: 5rem;
         margin-right: 5rem;
         width: 90rem;
         min-height: 40rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .navbar {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar .form-control {
+        border-radius: 25px;
+        border: 2px solid #007bff;
+        transition: border-color 0.3s ease;
+    }
+
+    .navbar .form-control:focus {
+        border-color: #0056b3;
+    }
+
+    .navbar .btn {
+        border-radius: 25px;
+        background-color: #007bff;
+        color: white;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .navbar .btn:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+    .navbar .navbar-icons a {
+        margin-left: 15px;
+        color: #333;
+        transition: color 0.3s ease;
+    }
+
+    .navbar .navbar-icons a:hover {
+        color: #007bff;
+    }
+
+    .navbar .navbar-icons .icon {
+        width: 1.5rem;
+        height: 1.5rem;
     }
 </style>
 
@@ -38,10 +78,17 @@
                     <button class="btn" type="submit">Search</button>
                 </form>
             </div>
+            <div class="navbar-icons d-flex align-items-center">
+                <a href="cart.jsp" title="Cart">
+                    <img src="../image/shopping_cart_icon.png" alt="Cart" class="icon">
+                </a>
+                <a href="personal-account.jsp" title="User Profile">
+                    <img src="../image/account_icon.png" alt="User Profile" class="icon">
+                </a>
+            </div>
         </div>
     </nav>
 </header>
 
 <main>
     <div class="body-content mt-4">
-        

@@ -6,6 +6,7 @@ package controller;
 
 import dao.ProductDAO;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import model.Product;
  *
  * @author ASUS
  */
+@WebServlet(name = "ProductDetailsController", urlPatterns = {"/ProductDetailsController"})
 public class ProductDetailsController extends HttpServlet {
     
       protected void processRequest(HttpServletRequest request, HttpServletResponse response)
