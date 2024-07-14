@@ -5,21 +5,21 @@
 --%>
 
 <%@ include file="../layout/customer-navbar.jsp" %>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
     .order-estimate {
         min-height: 20rem;
         border-radius: 0.2rem;
         box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
     }
-    
+
     .img-thumbnail {
         width: 100px;
         height: 100px;
         object-fit: cover;
         border-radius: 0.2rem;
     }
-    
+
     .product-name {
         display: -webkit-box;
         -webkit-line-clamp: 2;
@@ -32,7 +32,7 @@
         font-size: 0.9rem;
         font-weight: 500;
     }
-    
+
     .return-display {
         color: orangered;
         border: 0.5px solid orangered;
@@ -40,7 +40,7 @@
         padding: 0.1rem 0.5rem;
         font-size: 0.7rem;
     }
-    
+
     .quantity-icon {
         cursor: pointer;
     }
@@ -132,14 +132,14 @@
                     <div class="p-4">
                         <h4 class="text-center">Order Estimate</h4>
                         <div class="ms-3 mt-3">
-                            <b>Subtotal:</b> <span class="subtotal" id="price"></span>
+                            <b>Subtotal:</b> <span class="subtotal" id="price">${subtotal}</span>
                         </div>
                         <div class="ms-3 mt-3">
                             <b>Shipping: </b> <span class="shipping" id="price">20000</span>
                         </div>
                         <hr class="py-3">
                         <div>
-                            <p class="fs-4">Estimate Total: <span class="total fs-4 text-primary" id="price">20000</span></p>
+                            <p class="fs-4">Estimate Total: <span class="total fs-4 text-primary" id="price">${estimateTotal}</span></p>
                         </div>
                         <div class="d-grid mx-auto mt-5">
                             <button class="btn btn-success">
@@ -152,12 +152,11 @@
             </div>
         </div>
     </div>
-    <div id=""class="d-none">Hello</div>
 </section>
 
 <script type="text/javascript">
-    document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
-        checkbox.addEventListener('change', function() {
+    document.querySelectorAll('input[type="checkbox"]').forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
             if (this.checked) {
                 let submitButton = document.getElementById('submit-button');
                 let itemId = this.id.slice(9);
@@ -166,13 +165,13 @@
 
                 submitButton.href = submitButton.href + "itemId=" + itemId + "&quantity=" + quantity + "&";
 
-                console.log(submitButton.href + "itemId=" + this.id.slice(9) + "&quantity=" + (document.getElementById("quantity-" +  this.id.slice(9)).textContent) + "&");
+                console.log(submitButton.href + "itemId=" + this.id.slice(9) + "&quantity=" + (document.getElementById("quantity-" + this.id.slice(9)).textContent) + "&");
             } else {
                 console.log('Checkbox ' + this.id + ' is unchecked');
             }
         });
     });
-    
+
     function getSubTotalOfAllItems() {
         let total = 0;
         let rows = document.querySelectorAll("tbody tr");
@@ -184,30 +183,101 @@
         });
 
         let subtotal = document.querySelector(".subtotal");
-        subtotal.textContent = formatCurrency(total * 1000);
+        subtotal.textContent = formatCurrency(total);
 
         let estimateTotal = document.querySelector(".total");
         let shipping = parseFloat(document.querySelector(".shipping").textContent);
-        estimateTotal.textContent = formatCurrency((total + shipping) * 1000);
+        estimateTotal.textContent = formatCurrency((total + shipping));
     }
-    
-    function handleChange(checkbox) {
-        let total = 0;
-        let rows = document.querySelectorAll("tbody tr");
 
-        rows.forEach(row => {
-            let checkbox = row.querySelector("input[type='checkbox']");
-            if (checkbox.checked) {
-                let price = parseFloat(row.querySelector(".total-price").textContent);
-                total += price;
-            }
-        });
+    document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+    checkbox.addEventListener('change', function() {
+        handleChange();
+    });
+});
 
-        let subtotal = document.querySelector(".subtotal");
-        subtotal.textContent = formatCurrency(total * 1000);
-        let estimateTotal = document.querySelector(".total");
-        estimateTotal.textContent = formatCurrency((parseFloat(document.querySelector(".shipping").textContent) +  total) * 1000);
+document.querySelectorAll('input[type="number"]').forEach(function(input) {
+    input.addEventListener('input', function() {
+        handleChange();
+    });
+});
+
+function handleChange() {
+    let total = 0;
+    let rows = document.querySelectorAll("tbody tr");
+
+    rows.forEach(row => {
+        let checkbox = row.querySelector("input[type='checkbox']");
+        if (checkbox.checked) {
+            let quantity = parseFloat(row.querySelector("input[type='number']").value);
+            let price = parseFloat(row.querySelector(".total-price").textContent);
+            total += quantity * price;
+        }
+    });
+
+    let subtotal = document.querySelector(".subtotal");
+    subtotal.textContent = formatCurrency(total);
+
+    let shipping = parseFloat(document.querySelector(".shipping").textContent);
+    let estimateTotal = total + shipping;
+    let totalElement = document.querySelector(".total");
+    totalElement.textContent = formatCurrency(estimateTotal);
+
+    // C?p nh?t l?i ???ng d?n cho nút Checkout
+    updateCheckoutLink();
+
+    console.log("Updated subtotal and total: " + subtotal.textContent + ", " + totalElement.textContent);
+}
+
+function updateCheckoutLink() {
+    let submitButton = document.getElementById('submit-button');
+    let selectedItems = document.querySelectorAll('input[type="checkbox"]:checked');
+    let queryParams = [];
+
+    selectedItems.forEach(item => {
+        let itemId = item.id.slice(9);
+        let quantityElement = document.getElementById("quantity-" + itemId);
+        let quantity = quantityElement ? quantityElement.value : 0;
+        queryParams.push(`itemId=${itemId}&quantity=${quantity}`);
+    });
+
+    let checkoutLink = "order?type=from-cart";
+    if (queryParams.length > 0) {
+        checkoutLink += "&" + queryParams.join("&");
     }
+
+    submitButton.href = checkoutLink;
+}
+
+function getSubTotalOfAllItems() {
+    let total = 0;
+    let rows = document.querySelectorAll("tbody tr");
+
+    rows.forEach(row => {
+        let quantity = parseFloat(row.querySelector("input[type='number']").value);
+        let price = parseFloat(row.querySelector(".total-price").textContent);
+        total += quantity * price;
+    });
+
+    let subtotal = document.querySelector(".subtotal");
+    subtotal.textContent = formatCurrency(total);
+
+    let shipping = parseFloat(document.querySelector(".shipping").textContent);
+    let estimateTotal = total + shipping;
+    let totalElement = document.querySelector(".total");
+    totalElement.textContent = formatCurrency(estimateTotal);
+}
+
+function formatCurrency(value) {
+    return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'VND'
+    }).format(value);
+}
+
+getSubTotalOfAllItems();
+
+
 </script>
 
 <%@ include file="../layout/customer-footer.jsp" %>

@@ -15,6 +15,7 @@ import java.util.List;
 import model.CartItem;
 import model.Product;
 import model.User;
+import util.Cookiez;
 
 /**
  *
@@ -47,38 +48,38 @@ public class CartController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (processRequest(req, resp)) return;
         
-        User user = (User) req.getSession().getAttribute("userInfo");
-        System.out.println("user infor " + user);
-        List<CartItem> cartItems = dbContext.getOrderItemsByUserId(1);
+        User user = (User) Cookiez.get("userInfo", req);
+        System.out.println("user infor: " + user);
+        List<CartItem> cartItems = dbContext.getOrderItemsByUserId(user.getId());
         
         req.setAttribute("cartItems", cartItems);
         req.getRequestDispatcher("customer/cart.jsp").forward(req, resp);
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = (User) req.getSession().getAttribute("userInfo");
-        int productId = Integer.parseInt(req.getParameter("productId"));
-        int productPrice = Integer.parseInt(req.getParameter("productPrice"));
-        int quantity = Integer.parseInt(req.getParameter("quantity"));
-        
-        
-        boolean isAdded = dbContext.addItemIntoCartByUserId(
-                                new CartItem(
-                                        new Product(productId, productPrice), 
-                                        quantity
-                                ),
-                                user.getId()
-                        );
-        
-        if (isAdded) {
-            req.setAttribute("message", "Added product into cart");
-        } else {
-            req.setAttribute("message", "Add product into cart failed");
-        }
-        
-        req.getRequestDispatcher("product-detail?id=" + productId).forward(req, resp);
-    }
+//    @Override
+//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        User user = (User) Cookiez.get("userInfo", req);
+//        int productId = Integer.parseInt(req.getParameter("productId"));
+//        int productPrice = Integer.parseInt(req.getParameter("productPrice"));
+//        int quantity = Integer.parseInt(req.getParameter("quantity"));
+//        
+//        
+//        boolean isAdded = dbContext.addItemIntoCartByUserId(
+//                                new CartItem(
+//                                        new Product(productId, productPrice), 
+//                                        quantity
+//                                ),
+//                                user.getId()
+//                        );
+//        
+//        if (isAdded) {
+//            req.setAttribute("message", "Added product into cart");
+//        } else {
+//            req.setAttribute("message", "Add product into cart failed");
+//        }
+//        
+//        req.getRequestDispatcher("product-detail?id=" + productId).forward(req, resp);
+//    }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

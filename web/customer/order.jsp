@@ -6,6 +6,8 @@
 
 <%@ include file="../layout/customer-navbar.jsp" %>
 <%@ page import="enums.PaymentType" %>
+<%@ page import="util.Cookiez" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style>
     .order-estimate {
@@ -92,7 +94,7 @@
                             <tr>
                                 <td>Address</td>
                                 <td>
-                                    <textarea type="text" style="width: 15rem;" name="address" value="${sessionScope.userInfo.address}"></textarea>
+                                    <textarea style="width: 15rem;" name="address" value="${Cookiez.get("userInfo", request).address}"></textarea>
                                 </td>
                             </tr>
                              <tr>

@@ -44,7 +44,8 @@ public class Cookiez {
 
             for (Cookie c : cookies) {
                 if (c.getName().equals(name)) {
-                    rs = Cast.cast(URLDecoder.decode(c.getValue(), StandardCharsets.UTF_8.toString()));
+                    String cookieValueToString = URLDecoder.decode(c.getValue(), StandardCharsets.UTF_8.toString());
+                    rs = Cast.cast(cookieValueToString);
                 }
             }
         } catch (UnsupportedEncodingException e) {

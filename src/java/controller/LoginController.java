@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.User;
+import util.Cookiez;
 import util.Hash;
 
 @WebServlet(name="LoginController", urlPatterns={"/login"})
@@ -35,8 +36,7 @@ public class LoginController extends HttpServlet {
             request.setAttribute("errorMessage", "Vui lòng nhập tên đăng nhập và mật khẩu!");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
-            request.getSession().setAttribute("userInfo", user);
-            request.getSession().setMaxInactiveInterval(0);
+            Cookiez.add("userInfo", user, 120, response);
             response.sendRedirect("home");
         }
     }

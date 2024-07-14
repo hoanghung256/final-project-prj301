@@ -14,9 +14,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,7 +26,6 @@ import java.util.logging.Logger;
 public class Cast {
     
     private static final String MODEL_MODULE = "model.";
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
     
     public static Object cast(String value) {
         String className = MODEL_MODULE + value.split("\\{")[0];
@@ -38,6 +36,8 @@ public class Cast {
             Field[] fields = clazz.getDeclaredFields();
             Object[] fieldsValue = getFieldsValue(fields, value);
             Class<?>[] parameterTypes = getParameterTypes(fields);
+            
+            System.out.println(Arrays.toString(parameterTypes));;
             
             o = clazz.getConstructor(parameterTypes).newInstance(fieldsValue);
         } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | InvocationTargetException | IllegalAccessException | IllegalArgumentException  e) {
@@ -101,13 +101,8 @@ public class Cast {
             return Double.valueOf(valueStr);
         } else if (fieldType == boolean.class || fieldType == Boolean.class) {
             return Boolean.valueOf(valueStr);
-        } else if (fieldType == Date.class) {
-            try {
-                return DATE_FORMAT.parse(valueStr);
-            } catch (ParseException e) {
-                Logger.getLogger(Cast.class.getName()).log(Level.SEVERE, null, e);
-                return null;
-            }
+        } else if (fieldType == LocalDate.class) {
+            return DateTimeConverter.stringToLocalDate(valueStr);
         } else if (fieldType == Gender.class) {
             return Gender.valueOf(valueStr);
         } else if (fieldType == Role.class) {
